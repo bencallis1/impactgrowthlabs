@@ -19,6 +19,8 @@ export default async function HomePage() {
     getTeamMembers(),
   ]);
 
+  // console.log('MEMMMMBERS', members)
+
   return (
     <>
       <Hero />

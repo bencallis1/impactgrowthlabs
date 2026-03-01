@@ -463,8 +463,10 @@ const MOCK_JOB_POSTINGS: JobPosting[] = [
 
 // ---------------------------------------------------------------------------
 // Query helpers
-// Contentful SDK v11 uses EntrySkeletonType for generics; we cast via `any`
-// since all return values are explicitly typed via our own interfaces.
+// When Contentful credentials are present, always return live data — no mock
+// fallback. Mock data is only used when credentials are absent (local dev).
+// Contentful SDK v11: we cast via `any` since return values are typed by our
+// own interfaces.
 // ---------------------------------------------------------------------------
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -478,9 +480,9 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
       content_type: "blogPost",
       order: ["-fields.publishedDate"],
     });
-    return res.items.length ? (res.items as unknown as BlogPost[]) : MOCK_BLOG_POSTS;
+    return res.items as unknown as BlogPost[];
   } catch {
-    return MOCK_BLOG_POSTS;
+    return [];
   }
 }
 
@@ -493,11 +495,9 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
       "fields.slug": slug,
       limit: 1,
     });
-    return res.items.length
-      ? (res.items[0] as unknown as BlogPost)
-      : (MOCK_BLOG_POSTS.find((p) => p.fields.slug === slug) ?? null);
+    return res.items.length ? (res.items[0] as unknown as BlogPost) : null;
   } catch {
-    return MOCK_BLOG_POSTS.find((p) => p.fields.slug === slug) ?? null;
+    return null;
   }
 }
 
@@ -510,9 +510,9 @@ export async function getFeaturedBlogPosts(): Promise<BlogPost[]> {
       "fields.featured": true,
       order: ["-fields.publishedDate"],
     });
-    return res.items.length ? (res.items as unknown as BlogPost[]) : MOCK_BLOG_POSTS.filter((p) => p.fields.featured);
+    return res.items as unknown as BlogPost[];
   } catch {
-    return MOCK_BLOG_POSTS.filter((p) => p.fields.featured);
+    return [];
   }
 }
 
@@ -524,9 +524,9 @@ export async function getCaseStudies(): Promise<CaseStudy[]> {
       content_type: "caseStudy",
       order: ["-fields.publishedDate"],
     });
-    return res.items.length ? (res.items as unknown as CaseStudy[]) : MOCK_CASE_STUDIES;
+    return res.items as unknown as CaseStudy[];
   } catch {
-    return MOCK_CASE_STUDIES;
+    return [];
   }
 }
 
@@ -539,54 +539,31 @@ export async function getCaseStudy(slug: string): Promise<CaseStudy | null> {
       "fields.slug": slug,
       limit: 1,
     });
-    return res.items.length
-      ? (res.items[0] as unknown as CaseStudy)
-      : (MOCK_CASE_STUDIES.find((c) => c.fields.slug === slug) ?? null);
+    return res.items.length ? (res.items[0] as unknown as CaseStudy) : null;
   } catch {
-    return MOCK_CASE_STUDIES.find((c) => c.fields.slug === slug) ?? null;
+    return null;
   }
 }
 
 /**
  * Fetch all case studies linked to a specific portfolio company.
- *
- * Uses a reverse lookup via the `companyRef` field on caseStudy entries —
- * this is the canonical relationship between the two content types. A case
- * study is considered "connected" to a company only when its `companyRef`
- * field resolves to that company entry.
- *
- * @param companyId - The Contentful sys.id of the portfolio company.
- *                    Use `company.sys.id` after fetching via getPortfolioCompany().
- *
- * @example
- * const company = await getPortfolioCompany("greentech-solutions")
- * if (company) {
- *   const studies = await getCaseStudiesForCompany(company.sys.id)
- * }
+ * Uses a reverse lookup via the `companyRef` field — the canonical relationship.
  */
 export async function getCaseStudiesForCompany(companyId: string): Promise<CaseStudy[]> {
   const client = getClient() as AnyClient | null;
   if (!client) {
-    // In mock mode, match by sys.id on the resolved companyRef
-    return MOCK_CASE_STUDIES.filter(
-      (cs) => cs.fields.companyRef?.sys.id === companyId
-    );
+    return MOCK_CASE_STUDIES.filter((cs) => cs.fields.companyRef?.sys.id === companyId);
   }
   try {
-    // Contentful reverse-link query: find caseStudy entries where companyRef
-    // links to the given entry ID. The `include: 2` parameter resolves the
-    // companyRef entry inline so callers get the full PortfolioCompany object.
     const res = await client.getEntries({
       content_type: "caseStudy",
       "fields.companyRef.sys.id": companyId,
       order: ["-fields.publishedDate"],
       include: 2,
     });
-    return res.items.length
-      ? (res.items as unknown as CaseStudy[])
-      : MOCK_CASE_STUDIES.filter((cs) => cs.fields.companyRef?.sys.id === companyId);
+    return res.items as unknown as CaseStudy[];
   } catch {
-    return MOCK_CASE_STUDIES.filter((cs) => cs.fields.companyRef?.sys.id === companyId);
+    return [];
   }
 }
 
@@ -598,9 +575,9 @@ export async function getPortfolioCompanies(): Promise<PortfolioCompany[]> {
       content_type: "portfolioCompany",
       order: ["fields.name"],
     });
-    return res.items.length ? (res.items as unknown as PortfolioCompany[]) : MOCK_PORTFOLIO;
+    return res.items as unknown as PortfolioCompany[];
   } catch {
-    return MOCK_PORTFOLIO;
+    return [];
   }
 }
 
@@ -613,11 +590,9 @@ export async function getPortfolioCompany(slug: string): Promise<PortfolioCompan
       "fields.slug": slug,
       limit: 1,
     });
-    return res.items.length
-      ? (res.items[0] as unknown as PortfolioCompany)
-      : (MOCK_PORTFOLIO.find((c) => c.fields.slug === slug) ?? null);
+    return res.items.length ? (res.items[0] as unknown as PortfolioCompany) : null;
   } catch {
-    return MOCK_PORTFOLIO.find((c) => c.fields.slug === slug) ?? null;
+    return null;
   }
 }
 
@@ -630,11 +605,9 @@ export async function getFeaturedPortfolioCompanies(): Promise<PortfolioCompany[
       "fields.featured": true,
       order: ["fields.name"],
     });
-    return res.items.length
-      ? (res.items as unknown as PortfolioCompany[])
-      : MOCK_PORTFOLIO.filter((c) => c.fields.featured);
+    return res.items as unknown as PortfolioCompany[];
   } catch {
-    return MOCK_PORTFOLIO.filter((c) => c.fields.featured);
+    return [];
   }
 }
 
@@ -646,9 +619,9 @@ export async function getTeamMembers(): Promise<TeamMember[]> {
       content_type: "teamMember",
       order: ["fields.sortOrder", "fields.name"],
     });
-    return res.items.length ? (res.items as unknown as TeamMember[]) : MOCK_TEAM;
+    return res.items as unknown as TeamMember[];
   } catch {
-    return MOCK_TEAM;
+    return [];
   }
 }
 
@@ -661,14 +634,13 @@ export async function getTeamMember(slug: string): Promise<TeamMember | null> {
       "fields.slug": slug,
       limit: 1,
     });
-    return res.items.length
-      ? (res.items[0] as unknown as TeamMember)
-      : (MOCK_TEAM.find((m) => m.fields.slug === slug) ?? null);
+    return res.items.length ? (res.items[0] as unknown as TeamMember) : null;
   } catch {
-    return MOCK_TEAM.find((m) => m.fields.slug === slug) ?? null;
+    return null;
   }
 }
 
+/** Fetch all blog posts authored by a specific team member (reverse lookup on authorRef). */
 export async function getBlogPostsByAuthor(memberId: string): Promise<BlogPost[]> {
   const client = getClient() as AnyClient | null;
   if (!client) {
@@ -681,14 +653,13 @@ export async function getBlogPostsByAuthor(memberId: string): Promise<BlogPost[]
       order: ["-fields.publishedDate"],
       include: 1,
     });
-    return res.items.length
-      ? (res.items as unknown as BlogPost[])
-      : MOCK_BLOG_POSTS.filter((p) => p.fields.authorRef?.sys.id === memberId);
+    return res.items as unknown as BlogPost[];
   } catch {
-    return MOCK_BLOG_POSTS.filter((p) => p.fields.authorRef?.sys.id === memberId);
+    return [];
   }
 }
 
+/** Fetch all case studies authored by a specific team member (reverse lookup on authorRef). */
 export async function getCaseStudiesByAuthor(memberId: string): Promise<CaseStudy[]> {
   const client = getClient() as AnyClient | null;
   if (!client) {
@@ -701,11 +672,9 @@ export async function getCaseStudiesByAuthor(memberId: string): Promise<CaseStud
       order: ["-fields.publishedDate"],
       include: 2,
     });
-    return res.items.length
-      ? (res.items as unknown as CaseStudy[])
-      : MOCK_CASE_STUDIES.filter((cs) => cs.fields.authorRef?.sys.id === memberId);
+    return res.items as unknown as CaseStudy[];
   } catch {
-    return MOCK_CASE_STUDIES.filter((cs) => cs.fields.authorRef?.sys.id === memberId);
+    return [];
   }
 }
 
@@ -717,9 +686,9 @@ export async function getPortalDocuments(): Promise<PortalDocument[]> {
       content_type: "portalDocument",
       order: ["-fields.publishedDate"],
     });
-    return res.items.length ? (res.items as unknown as PortalDocument[]) : MOCK_PORTAL_DOCS;
+    return res.items as unknown as PortalDocument[];
   } catch {
-    return MOCK_PORTAL_DOCS;
+    return [];
   }
 }
 
@@ -731,9 +700,9 @@ export async function getPortalNews(): Promise<PortalNewsItem[]> {
       content_type: "portalNewsItem",
       order: ["-fields.publishedDate"],
     });
-    return res.items.length ? (res.items as unknown as PortalNewsItem[]) : MOCK_PORTAL_NEWS;
+    return res.items as unknown as PortalNewsItem[];
   } catch {
-    return MOCK_PORTAL_NEWS;
+    return [];
   }
 }
 
@@ -745,9 +714,9 @@ export async function getTestimonials(): Promise<Testimonial[]> {
       content_type: "testimonial",
       order: ["-fields.publishedDate"],
     });
-    return res.items.length ? (res.items as unknown as Testimonial[]) : MOCK_TESTIMONIALS;
+    return res.items as unknown as Testimonial[];
   } catch {
-    return MOCK_TESTIMONIALS;
+    return [];
   }
 }
 
@@ -760,11 +729,9 @@ export async function getFeaturedTestimonials(): Promise<Testimonial[]> {
       "fields.featured": true,
       order: ["-fields.publishedDate"],
     });
-    return res.items.length
-      ? (res.items as unknown as Testimonial[])
-      : MOCK_TESTIMONIALS.filter((t) => t.fields.featured);
+    return res.items as unknown as Testimonial[];
   } catch {
-    return MOCK_TESTIMONIALS.filter((t) => t.fields.featured);
+    return [];
   }
 }
 
@@ -776,9 +743,9 @@ export async function getPressItems(): Promise<PressItem[]> {
       content_type: "pressItem",
       order: ["-fields.publishedDate"],
     });
-    return res.items.length ? (res.items as unknown as PressItem[]) : MOCK_PRESS_ITEMS;
+    return res.items as unknown as PressItem[];
   } catch {
-    return MOCK_PRESS_ITEMS;
+    return [];
   }
 }
 
@@ -794,9 +761,9 @@ export async function getFaqs(category?: string): Promise<FAQ[]> {
     };
     if (category) query["fields.category"] = category;
     const res = await client.getEntries(query);
-    return res.items.length ? (res.items as unknown as FAQ[]) : MOCK_FAQS;
+    return res.items as unknown as FAQ[];
   } catch {
-    return MOCK_FAQS;
+    return [];
   }
 }
 
@@ -812,9 +779,9 @@ export async function getJobPostings(activeOnly = true): Promise<JobPosting[]> {
     };
     if (activeOnly) query["fields.active"] = true;
     const res = await client.getEntries(query);
-    return res.items.length ? (res.items as unknown as JobPosting[]) : MOCK_JOB_POSTINGS;
+    return res.items as unknown as JobPosting[];
   } catch {
-    return MOCK_JOB_POSTINGS;
+    return [];
   }
 }
 
@@ -827,10 +794,8 @@ export async function getJobPosting(slug: string): Promise<JobPosting | null> {
       "fields.slug": slug,
       limit: 1,
     });
-    return res.items.length
-      ? (res.items[0] as unknown as JobPosting)
-      : (MOCK_JOB_POSTINGS.find((j) => j.fields.slug === slug) ?? null);
+    return res.items.length ? (res.items[0] as unknown as JobPosting) : null;
   } catch {
-    return MOCK_JOB_POSTINGS.find((j) => j.fields.slug === slug) ?? null;
+    return null;
   }
 }

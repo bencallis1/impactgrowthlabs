@@ -202,6 +202,7 @@ const CONTENT_TYPES = [
         "Portfolio Company (linked — set this to connect case study to company)",
         "portfolioCompany"
       ),
+      entryLink("authorRef", "Author (linked TeamMember)", "teamMember"),
       boolean_("featured", "Featured"),
       symbolList("tags", "Tags", {
         items: { type: "Symbol" },
@@ -311,6 +312,15 @@ const CONTENT_TYPES = [
         ],
       }),
       // New fields
+      symbol("slug", "Slug", { required: true, ...slugValidation() }),
+      symbol("memberType", "Member Type", {
+        validations: [
+          {
+            in: ["Founder", "Team", "Advisor", "Industry Expert", "Board"],
+            message: "Select a member type from the list.",
+          },
+        ],
+      }),
       symbol("twitter", "Twitter / X handle", {
         validations: [{ regexp: { pattern: "^@?[\\w]{1,15}$", flags: "" }, message: "Enter a Twitter handle (e.g. @handle)." }],
       }),

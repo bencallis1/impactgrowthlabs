@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { Linkedin, Twitter, ArrowLeft, BookOpen, FileText } from "lucide-react";
+import { ArrowLeft, BookOpen, FileText, LinkedinIcon, Twitter } from "lucide-react";
 import {
   getTeamMembers,
   getTeamMember,
@@ -9,6 +9,8 @@ import {
   getCaseStudiesByAuthor,
 } from "@/lib/contentful";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
+import { RichTextRenderer } from "@/components/blog/RichTextRenderer";
+import type { Document } from "@contentful/rich-text-types";
 
 export const revalidate = 3600;
 
@@ -25,9 +27,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const member = await getTeamMember(slug);
   if (!member) return { title: "Team Member Not Found" };
+
+  const bio = member.fields.bio;
+  const bioDescription =
+    typeof bio === "string" ? bio : "Team member profile";
+
   return {
     title: member.fields.name,
-    description: member.fields.bio,
+    description: bioDescription,
   };
 }
 
@@ -54,6 +61,7 @@ export default async function TeamMemberPage({ params }: Props) {
   if (!member) notFound();
 
   const { name, role, bio, memberType, linkedIn, twitter } = member.fields;
+  const isRichTextBio = typeof bio === "object" && bio !== null;
 
   // Fetch related writing in parallel
   const [blogPosts, caseStudies] = await Promise.all([
@@ -107,7 +115,7 @@ export default async function TeamMemberPage({ params }: Props) {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 text-sm font-medium text-[#2D6A4F] hover:text-[#1A3A2E] transition-colors"
                 >
-                  <Linkedin size={15} />
+                  <LinkedinIcon size={15} />
                   LinkedIn
                 </a>
               )}
@@ -128,9 +136,15 @@ export default async function TeamMemberPage({ params }: Props) {
 
         {/* Bio */}
         <AnimatedSection delay={0.1} className="mb-16">
-          <div className="prose prose-lg max-w-none">
-            <p className="text-xl text-[#0F1A14]/70 leading-relaxed">{bio}</p>
-          </div>
+          {isRichTextBio ? (
+            <RichTextRenderer document={bio as Document} />
+          ) : (
+            <div className="prose prose-lg max-w-none">
+              <p className="text-xl text-[#0F1A14]/70 leading-relaxed">
+                {bio}
+              </p>
+            </div>
+          )}
         </AnimatedSection>
 
         {/* Related writing */}

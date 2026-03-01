@@ -73,22 +73,7 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.55 }}
         >
-          {/* <Link
-            href="/apply"
-            className="inline-flex items-center gap-2 rounded-full bg-[#1A3A2E] px-8 py-4 text-base font-medium text-white hover:bg-[#2D6A4F] transition-colors group shadow-lg shadow-[#1A3A2E]/20"
-          >
-            Apply as a Founder
-            <ArrowRight
-              size={18}
-              className="group-hover:translate-x-1 transition-transform"
-            />
-          </Link>
-          <Link
-            href="/portal"
-            className="inline-flex items-center gap-2 rounded-full border-2 border-[#1A3A2E] px-8 py-4 text-base font-medium text-[#1A3A2E] hover:bg-[#1A3A2E] hover:text-white transition-all"
-          >
-            Investor Portal
-          </Link> */}
+    
         </motion.div>
 
         {/* Trust strip */}
@@ -96,14 +81,12 @@ export function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.75 }}
-          className="inline-flex flex-wrap items-center justify-center rounded-2xl border border-[#1A3A2E]/10 bg-white/70 backdrop-blur-sm overflow-hidden shadow-sm"
+          className="grid grid-cols-2 md:grid-cols-4 w-full max-w-4xl mx-auto rounded-2xl border border-[#1A3A2E]/10 bg-white/70 backdrop-blur-sm overflow-hidden shadow-sm [&>div:nth-child(even)]:border-r-0 md:[&>div:nth-child(2)]:border-r [&>div:nth-child(-n+2)]:border-b [&>div:nth-child(-n+2)]:border-[#1A3A2E]/10 md:[&>div:nth-child(-n+2)]:border-b-0"
         >
-          {trustItems.map((item, i) => (
+          {trustItems.map((item) => (
             <div
               key={item.label}
-              className={`flex flex-col items-center px-8 py-4 ${
-                i < trustItems.length - 1 ? "border-r border-[#1A3A2E]/10" : ""
-              }`}
+              className="flex flex-col items-center justify-center px-4 py-4 md:px-8 md:py-4 border-r border-[#1A3A2E]/10 last:border-r-0"
             >
               <span className="font-serif text-xl text-[#1A3A2E] font-medium">
                 {item.value}

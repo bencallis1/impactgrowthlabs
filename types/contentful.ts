@@ -116,7 +116,7 @@ export interface TeamMember {
     name: string;
     slug: string;
     role: string;
-    bio: string;
+    bio: string | Document;
     photo?: ContentfulAsset;
     linkedIn?: string;
     twitter?: string;
