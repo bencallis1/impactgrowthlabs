@@ -61,6 +61,8 @@ export interface CaseStudy {
     // New fields
     /** Linked PortfolioCompany entry — preferred over plain-text company */
     companyRef?: PortfolioCompany;
+    /** Linked TeamMember entry — author of this case study */
+    authorRef?: TeamMember;
     featured?: boolean;
     sdgs?: string[];
     tags?: string[];
@@ -98,18 +100,29 @@ export interface PortfolioCompany {
 // Team Member
 // ---------------------------------------------------------------------------
 
+export const MEMBER_TYPES = [
+  "Founder",
+  "Team",
+  "Advisor",
+  "Industry Expert",
+  "Board",
+] as const;
+
+export type MemberType = (typeof MEMBER_TYPES)[number];
+
 export interface TeamMember {
   sys: { id: string };
   fields: {
     name: string;
+    slug: string;
     role: string;
     bio: string;
     photo?: ContentfulAsset;
     linkedIn?: string;
-    // New fields
     twitter?: string;
     sortOrder?: number;
     featured?: boolean;
+    memberType?: MemberType;
   };
 }
 

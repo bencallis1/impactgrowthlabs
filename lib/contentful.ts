@@ -201,7 +201,9 @@ const MOCK_TEAM: TeamMember[] = [
     sys: { id: "1" },
     fields: {
       name: "Sarah Chen",
+      slug: "sarah-chen",
       role: "Co-Founder & CEO",
+      memberType: "Founder",
       bio: "Former partner at a top-tier impact fund with 15 years building and scaling mission-driven companies across Southeast Asia and North America.",
       linkedIn: "https://www.linkedin.com/in/sarah-chen",
       sortOrder: 1,
@@ -212,7 +214,9 @@ const MOCK_TEAM: TeamMember[] = [
     sys: { id: "2" },
     fields: {
       name: "Marcus Williams",
+      slug: "marcus-williams",
       role: "Co-Founder & COO",
+      memberType: "Founder",
       bio: "Ex-McKinsey and World Bank. Led operational transformations for social enterprises in 20+ countries, from early-stage to growth.",
       linkedIn: "https://www.linkedin.com/in/marcus-williams",
       sortOrder: 2,
@@ -223,11 +227,52 @@ const MOCK_TEAM: TeamMember[] = [
     sys: { id: "3" },
     fields: {
       name: "Priya Patel",
+      slug: "priya-patel",
       role: "Head of Impact",
+      memberType: "Team",
       bio: "PhD in Environmental Science. Designed impact measurement frameworks now used by 200+ funds globally. Former UNDP climate advisor.",
       linkedIn: "https://www.linkedin.com/in/priya-patel",
       sortOrder: 3,
       featured: true,
+    },
+  },
+  {
+    sys: { id: "4" },
+    fields: {
+      name: "Dr. James Okafor",
+      slug: "james-okafor",
+      role: "Senior Advisor — Health Systems",
+      memberType: "Advisor",
+      bio: "Former WHO Director of Primary Health Care with 25 years of field experience across 30 countries. James advises our health portfolio on go-to-market strategy and regulatory navigation.",
+      linkedIn: "https://www.linkedin.com/in/james-okafor",
+      sortOrder: 4,
+      featured: false,
+    },
+  },
+  {
+    sys: { id: "5" },
+    fields: {
+      name: "Elena Vasquez",
+      slug: "elena-vasquez",
+      role: "Industry Expert — Circular Economy",
+      memberType: "Industry Expert",
+      bio: "Founder of CircularNext and former VP at the Ellen MacArthur Foundation. Elena brings deep expertise in circular business model design and industrial symbiosis.",
+      linkedIn: "https://www.linkedin.com/in/elena-vasquez",
+      sortOrder: 5,
+      featured: false,
+    },
+  },
+  {
+    sys: { id: "6" },
+    fields: {
+      name: "Robert Kim",
+      slug: "robert-kim",
+      role: "Board Member",
+      memberType: "Board",
+      bio: "Managing Partner at Sequoia Capital's Asia fund and co-founder of the APAC Sustainable Investors Network. Robert brings 20 years of venture experience.",
+      linkedIn: "https://www.linkedin.com/in/robert-kim",
+      sortOrder: 6,
+      featured: false,
     },
   },
 ];
@@ -604,6 +649,63 @@ export async function getTeamMembers(): Promise<TeamMember[]> {
     return res.items.length ? (res.items as unknown as TeamMember[]) : MOCK_TEAM;
   } catch {
     return MOCK_TEAM;
+  }
+}
+
+export async function getTeamMember(slug: string): Promise<TeamMember | null> {
+  const client = getClient() as AnyClient | null;
+  if (!client) return MOCK_TEAM.find((m) => m.fields.slug === slug) ?? null;
+  try {
+    const res = await client.getEntries({
+      content_type: "teamMember",
+      "fields.slug": slug,
+      limit: 1,
+    });
+    return res.items.length
+      ? (res.items[0] as unknown as TeamMember)
+      : (MOCK_TEAM.find((m) => m.fields.slug === slug) ?? null);
+  } catch {
+    return MOCK_TEAM.find((m) => m.fields.slug === slug) ?? null;
+  }
+}
+
+export async function getBlogPostsByAuthor(memberId: string): Promise<BlogPost[]> {
+  const client = getClient() as AnyClient | null;
+  if (!client) {
+    return MOCK_BLOG_POSTS.filter((p) => p.fields.authorRef?.sys.id === memberId);
+  }
+  try {
+    const res = await client.getEntries({
+      content_type: "blogPost",
+      "fields.authorRef.sys.id": memberId,
+      order: ["-fields.publishedDate"],
+      include: 1,
+    });
+    return res.items.length
+      ? (res.items as unknown as BlogPost[])
+      : MOCK_BLOG_POSTS.filter((p) => p.fields.authorRef?.sys.id === memberId);
+  } catch {
+    return MOCK_BLOG_POSTS.filter((p) => p.fields.authorRef?.sys.id === memberId);
+  }
+}
+
+export async function getCaseStudiesByAuthor(memberId: string): Promise<CaseStudy[]> {
+  const client = getClient() as AnyClient | null;
+  if (!client) {
+    return MOCK_CASE_STUDIES.filter((cs) => cs.fields.authorRef?.sys.id === memberId);
+  }
+  try {
+    const res = await client.getEntries({
+      content_type: "caseStudy",
+      "fields.authorRef.sys.id": memberId,
+      order: ["-fields.publishedDate"],
+      include: 2,
+    });
+    return res.items.length
+      ? (res.items as unknown as CaseStudy[])
+      : MOCK_CASE_STUDIES.filter((cs) => cs.fields.authorRef?.sys.id === memberId);
+  } catch {
+    return MOCK_CASE_STUDIES.filter((cs) => cs.fields.authorRef?.sys.id === memberId);
   }
 }
 
