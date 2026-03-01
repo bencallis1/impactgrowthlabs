@@ -29,11 +29,6 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: 'https://imagedelivery.net/lcKdEvt7ci2YjdeNVK02Iw/a948c15c-5075-4efc-2319-2c9d7fc90e00/Originals', // Must be an absolute URL
-        width: 800,
-        height: 600,
-      },
-      {
         url: 'https://imagedelivery.net/lcKdEvt7ci2YjdeNVK02Iw/f4ccd60a-e2bc-47cf-edfc-2ea980636500/Originals', // Must be an absolute URL
         width: 1800,
         height: 1600,
