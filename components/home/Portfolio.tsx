@@ -30,14 +30,14 @@ export function Portfolio({ companies }: { companies: PortfolioCompany[] }) {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
           <div>
             <p className="text-[#52B788] text-sm font-medium tracking-widest uppercase mb-4">
-              Portfolio
+              Active Projects
             </p>
             <h2 className="font-serif text-4xl sm:text-5xl text-[#1A3A2E]">
               Companies we believe in
             </h2>
           </div>
           <Link
-            href="/case-studies"
+            href="/portfolio"
             className="inline-flex items-center gap-2 text-[#2D6A4F] font-medium hover:gap-3 transition-all"
           >
             View case studies <ArrowRight size={18} />

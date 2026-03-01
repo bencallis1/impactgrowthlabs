@@ -5,10 +5,10 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 const trustItems = [
-  { value: "$50M+", label: "Capital Deployed" },
-  { value: "24", label: "Portfolio Companies" },
-  { value: "8,400+", label: "Jobs Created" },
-  { value: "12 SDGs", label: "Addressed" },
+  { value: "$500M+", label: "Contract Development" },
+  { value: "11", label: "Active Projects" },
+  { value: "8", label: "Core Vertical" },
+  { value: "10 SDGs", label: "Addressed" },
 ];
 
 export function Hero() {
@@ -50,9 +50,9 @@ export function Hero() {
           transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
         >
           Backing{" "}
-          <span className="italic text-[#52B788]">principled</span>
+          <span className=" text-[#52B788]">visonary</span>
           <br />
-          founders who build
+          founders building
           <br />a better world.
         </motion.h1>
 
@@ -63,10 +63,7 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          Impact Growth Labs is a venture studio at the intersection of capital
-          and purpose. We partner with mission-driven founders from day zero
-          through Series A — providing hands-on support, strategic capital, and
-          a global network.
+         The Natural Integration of Profit and Purpose
         </motion.p>
 
         {/* CTAs */}

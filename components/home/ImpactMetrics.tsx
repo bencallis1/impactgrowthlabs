@@ -15,27 +15,28 @@ interface Metric {
   description: string;
 }
 
+
 const metrics: Metric[] = [
   {
-    value: 50,
+    value: 500,
     suffix: "M+",
-    label: "Capital Deployed",
-    description: "USD across two funds",
+    label: "Contract Development",
+    description: "Pipeline growth for our core projects",
   },
   {
-    value: 24,
+    value: 11,
     suffix: "",
-    label: "Portfolio Companies",
-    description: "Across 6 sectors",
+    label: "Active Projects",
+    description: "Across 8 sectors",
   },
   {
-    value: 8400,
+    value: 4,
     suffix: "+",
-    label: "Jobs Created",
-    description: "In underserved communities",
+    label: "Philanthropic Initiative",
+    description: "The more we make, the more we give",
   },
   {
-    value: 12,
+    value: 10,
     suffix: "",
     label: "SDGs Addressed",
     description: "UN Sustainable Development Goals",

@@ -12,13 +12,13 @@ const services = [
     icon: LineChart,
     title: "Strategic Capital",
     description:
-      "Pre-seed to Series A. We deploy $250K–$2M in initial checks and lead or co-lead follow-on rounds, with a clear path to our LP network for larger raises.",
+     "We connect mission-driven founders with aligned capital partners — from initial checks to follow-on rounds — while providing the strategic support that makes them investment-ready."
   },
   {
     icon: Globe,
     title: "Global Network",
     description:
-      "Access to 300+ impact-aligned mentors, 40+ corporate partners actively seeking solutions, and a community of 24 portfolio companies who share learnings openly.",
+      "Access to 300+ impact-aligned mentors, 40+ corporate partners actively seeking solutions, and a growing community of dedicated leaders who share learnings openly.",
   },
   {
     icon: Users,
@@ -37,12 +37,10 @@ export function Services() {
             How We Work
           </p>
           <h2 className="font-serif text-4xl sm:text-5xl text-[#1A3A2E] mb-6">
-            More than capital
+          The Moment Everything Changes.
           </h2>
-          <p className="mx-auto max-w-2xl text-lg text-[#0F1A14]/60">
-            We built Impact Growth Labs as the studio we wished existed when we
-            were founders — hands-on, mission-aligned, and focused on
-            sustainable outcomes.
+          <p className="mx-auto max-w-2xl text-3xl text-[#0F1A14]/70">
+          We unlock tomorrow’s possibilities for today’s most impactful companies
           </p>
         </AnimatedSection>
 

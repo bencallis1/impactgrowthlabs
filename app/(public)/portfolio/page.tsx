@@ -23,15 +23,14 @@ export default async function PortfolioPage() {
         {/* Header */}
         <div className="mb-16">
           <p className="text-[#52B788] text-sm font-medium tracking-widest uppercase mb-4">
-            Portfolio
+            Active Projects
           </p>
           <h1 className="font-serif text-5xl sm:text-6xl text-[#1A3A2E] mb-6">
             Companies we believe in
           </h1>
           <p className="max-w-2xl text-lg text-[#0F1A14]/60 leading-relaxed">
             We partner with founders who are building measurable solutions to
-            climate, health, education, and resource challenges — from the
-            earliest days through Series A and beyond.
+            to the most challenging humanity and planetary problems — we believe that smart people who care can change the world
           </p>
         </div>
 
