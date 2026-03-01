@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { getPortfolioCompanies } from "@/lib/contentful";
-import { PortfolioCard } from "@/components/portfolio/PortfolioCard";
-import { StaggerGrid, StaggerItem } from "@/components/ui/AnimatedSection";
+import { PortfolioGrid } from "@/components/portfolio/PortfolioGrid";
 
 export const metadata: Metadata = {
   title: "Portfolio",
@@ -13,6 +12,10 @@ export const revalidate = 3600;
 
 export default async function PortfolioPage() {
   const companies = await getPortfolioCompanies();
+  // Sectors are always present and act as primary tags; custom tags are additive
+  const allTags = [
+    ...new Set(companies.flatMap((c) => [c.fields.sector, ...(c.fields.tags ?? [])])),
+  ].sort();
 
   return (
     <div className="min-h-screen bg-[#F7FAF8] pt-28 pb-24">
@@ -36,13 +39,7 @@ export default async function PortfolioPage() {
         {companies.length === 0 ? (
           <p className="text-[#0F1A14]/50">No portfolio companies listed yet.</p>
         ) : (
-          <StaggerGrid className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {companies.map((company) => (
-              <StaggerItem key={company.sys.id}>
-                <PortfolioCard company={company} />
-              </StaggerItem>
-            ))}
-          </StaggerGrid>
+          <PortfolioGrid companies={companies} allTags={allTags} />
         )}
       </div>
     </div>

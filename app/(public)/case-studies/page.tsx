@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { getCaseStudies } from "@/lib/contentful";
-import { CaseStudyCard } from "@/components/case-studies/CaseStudyCard";
-import { StaggerGrid, StaggerItem } from "@/components/ui/AnimatedSection";
+import { CaseStudiesGrid } from "@/components/case-studies/CaseStudiesGrid";
 
 export const metadata: Metadata = {
   title: "Case Studies",
@@ -12,6 +11,7 @@ export const revalidate = 3600;
 
 export default async function CaseStudiesPage() {
   const studies = await getCaseStudies();
+  const allTags = [...new Set(studies.flatMap((s) => s.fields.tags ?? []))].sort();
 
   return (
     <div className="min-h-screen bg-[#F7FAF8] pt-28 pb-24">
@@ -32,13 +32,7 @@ export default async function CaseStudiesPage() {
         {studies.length === 0 ? (
           <p className="text-[#0F1A14]/50">No case studies published yet.</p>
         ) : (
-          <StaggerGrid className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {studies.map((study) => (
-              <StaggerItem key={study.sys.id}>
-                <CaseStudyCard study={study} />
-              </StaggerItem>
-            ))}
-          </StaggerGrid>
+          <CaseStudiesGrid studies={studies} allTags={allTags} />
         )}
       </div>
     </div>

@@ -76,7 +76,7 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.55 }}
         >
-          <Link
+          {/* <Link
             href="/apply"
             className="inline-flex items-center gap-2 rounded-full bg-[#1A3A2E] px-8 py-4 text-base font-medium text-white hover:bg-[#2D6A4F] transition-colors group shadow-lg shadow-[#1A3A2E]/20"
           >
@@ -91,7 +91,7 @@ export function Hero() {
             className="inline-flex items-center gap-2 rounded-full border-2 border-[#1A3A2E] px-8 py-4 text-base font-medium text-[#1A3A2E] hover:bg-[#1A3A2E] hover:text-white transition-all"
           >
             Investor Portal
-          </Link>
+          </Link> */}
         </motion.div>
 
         {/* Trust strip */}

@@ -203,6 +203,9 @@ const CONTENT_TYPES = [
         "portfolioCompany"
       ),
       boolean_("featured", "Featured"),
+      symbolList("tags", "Tags", {
+        items: { type: "Symbol" },
+      }),
       symbolList("sdgs", "UN Sustainable Development Goals", {
         items: {
           type: "Symbol",
@@ -269,6 +272,9 @@ const CONTENT_TYPES = [
       symbol("location", "HQ Location", { validations: [{ size: { max: 60 } }] }),
       date("investmentDate", "Investment Date"),
       integer("foundingYear", "Founding Year"),
+      symbolList("tags", "Tags", {
+        items: { type: "Symbol" },
+      }),
       symbolList("sdgs", "UN Sustainable Development Goals", {
         items: {
           type: "Symbol",

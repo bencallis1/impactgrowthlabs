@@ -63,6 +63,7 @@ export interface CaseStudy {
     companyRef?: PortfolioCompany;
     featured?: boolean;
     sdgs?: string[];
+    tags?: string[];
     videoUrl?: string;
   };
 }
@@ -88,6 +89,7 @@ export interface PortfolioCompany {
     investmentDate?: string;
     foundingYear?: number;
     sdgs?: string[];
+    tags?: string[];
     impactThesis?: string;
   };
 }

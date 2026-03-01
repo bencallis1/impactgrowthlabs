@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { getBlogPosts } from "@/lib/contentful";
-import { BlogCard } from "@/components/blog/BlogCard";
-import { StaggerGrid, StaggerItem } from "@/components/ui/AnimatedSection";
+import { BlogGrid } from "@/components/blog/BlogGrid";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -12,6 +11,7 @@ export const revalidate = 3600;
 
 export default async function BlogPage() {
   const posts = await getBlogPosts();
+  const allTags = [...new Set(posts.flatMap((p) => p.fields.tags ?? []))].sort();
 
   return (
     <div className="min-h-screen bg-[#F7FAF8] pt-28 pb-24">
@@ -33,13 +33,7 @@ export default async function BlogPage() {
         {posts.length === 0 ? (
           <p className="text-[#0F1A14]/50">No posts published yet. Check back soon.</p>
         ) : (
-          <StaggerGrid className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {posts.map((post) => (
-              <StaggerItem key={post.sys.id}>
-                <BlogCard post={post} />
-              </StaggerItem>
-            ))}
-          </StaggerGrid>
+          <BlogGrid posts={posts} allTags={allTags} />
         )}
       </div>
     </div>
