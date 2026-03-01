@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Inter, DM_Serif_Display } from "next/font/google";
+import { Roboto, DM_Serif_Display } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
-const inter = Inter({
-  variable: "--font-inter",
+const inter = Roboto({
+  variable: "--font-roboto",
   subsets: ["latin"],
   display: "swap",
 });
@@ -30,9 +30,9 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: 'https://imagedelivery.net/lcKdEvt7ci2YjdeNVK02Iw/f4ccd60a-e2bc-47cf-edfc-2ea980636500/Originals', // Must be an absolute URL
-        width: 1800,
-        height: 1000,
+        url: 'https://imagedelivery.net/lcKdEvt7ci2YjdeNVK02Iw/19a6b340-ff53-463b-9999-60dec678a100/Originals', // Must be an absolute URL
+        width: 909,
+        height: 400,
         alt: 'Impact Growth Labs OG Image',
       },
     ],
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     siteId: '1467726470533754880',
     creator: '@nextjs',
     creatorId: '1467726470533754880',
-    images: ['https://imagedelivery.net/lcKdEvt7ci2YjdeNVK02Iw/f4ccd60a-e2bc-47cf-edfc-2ea980636500/Originals'], // Must be an absolute URL
+    images: ['https://imagedelivery.net/lcKdEvt7ci2YjdeNVK02Iw/19a6b340-ff53-463b-9999-60dec678a100/Originals'], // Must be an absolute URL
   },
   robots: {
     index: true,
