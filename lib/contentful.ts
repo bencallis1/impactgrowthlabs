@@ -101,44 +101,48 @@ const MOCK_PORTFOLIO: PortfolioCompany[] = [
     sys: { id: "1" },
     fields: {
       name: "GreenTech Solutions",
+      slug: "greentech-solutions",
       sector: "Climate",
       stage: "Series A",
-      description: "AI-powered supply chain decarbonization platform.",
+      description: "GreenTech Solutions has built an AI-powered platform that helps manufacturers and logistics companies map, measure, and reduce the carbon footprint across their entire supply chain. By integrating with existing ERP systems and shipping APIs, they surface actionable decarbonization opportunities at every tier of the supply chain — from raw material sourcing to last-mile delivery.",
       website: "https://greentechsolutions.example",
-      metrics: { carbonReduced: "40%", facilities: 120 },
+      metrics: { "Carbon Reduced": "40%", "Facilities Served": "120", "Tonnes CO₂ Avoided": "2.4M" },
     },
   },
   {
     sys: { id: "2" },
     fields: {
       name: "HealthBridge",
+      slug: "healthbridge",
       sector: "Health",
       stage: "Seed",
-      description: "Telemedicine for underserved communities in emerging markets.",
+      description: "HealthBridge delivers telemedicine and digital health services to underserved communities across six emerging markets. Their platform connects patients in rural and peri-urban areas with licensed clinicians via low-bandwidth mobile interfaces, reducing the need for costly and often inaccessible in-person visits. HealthBridge also partners with local community health workers to coordinate care continuity and chronic disease management.",
       website: "https://healthbridge.example",
-      metrics: { patientsServed: "100K+", countries: 6 },
+      metrics: { "Patients Served": "100K+", "Countries": "6", "Avg. Cost per Visit": "$2.80" },
     },
   },
   {
     sys: { id: "3" },
     fields: {
       name: "EduAccess",
+      slug: "eduaccess",
       sector: "Education",
       stage: "Series A",
-      description: "Adaptive learning platform for first-generation college students.",
+      description: "EduAccess is an adaptive learning platform purpose-built for first-generation college students in the United States. By combining AI-driven personalized learning paths with peer mentorship networks and wraparound support services, EduAccess addresses the structural barriers that lead to high dropout rates among underrepresented students. Their data shows a 28-point improvement in graduation rates among platform users.",
       website: "https://eduaccess.example",
-      metrics: { studentsSupported: "45K", gradRate: "+28%" },
+      metrics: { "Students Supported": "45K", "Graduation Rate Lift": "+28%", "Partner Institutions": "38" },
     },
   },
   {
     sys: { id: "4" },
     fields: {
       name: "CircularMaterials",
+      slug: "circular-materials",
       sector: "Circular Economy",
       stage: "Seed",
-      description: "Industrial-grade materials from post-consumer waste streams.",
+      description: "CircularMaterials diverts post-consumer plastic and textile waste from landfills and transforms it into industrial-grade materials for construction, packaging, and automotive applications. Their proprietary processing technology produces materials that meet or exceed the performance specifications of virgin feedstocks — at a fraction of the environmental cost. They currently operate two processing facilities and supply 34 manufacturing partners.",
       website: "https://circularmaterials.example",
-      metrics: { wasteProcessed: "12K tonnes", partners: 34 },
+      metrics: { "Waste Processed": "12K tonnes", "Manufacturing Partners": "34", "Material SKUs": "18" },
     },
   },
 ];
@@ -321,6 +325,23 @@ export async function getPortfolioCompanies(): Promise<PortfolioCompany[]> {
     return res.items.length ? (res.items as unknown as PortfolioCompany[]) : MOCK_PORTFOLIO;
   } catch {
     return MOCK_PORTFOLIO;
+  }
+}
+
+export async function getPortfolioCompany(slug: string): Promise<PortfolioCompany | null> {
+  const client = getClient() as AnyClient | null;
+  if (!client) return MOCK_PORTFOLIO.find((c) => c.fields.slug === slug) ?? null;
+  try {
+    const res = await client.getEntries({
+      content_type: "portfolioCompany",
+      "fields.slug": slug,
+      limit: 1,
+    });
+    return res.items.length
+      ? (res.items[0] as unknown as PortfolioCompany)
+      : (MOCK_PORTFOLIO.find((c) => c.fields.slug === slug) ?? null);
+  } catch {
+    return MOCK_PORTFOLIO.find((c) => c.fields.slug === slug) ?? null;
   }
 }
 

@@ -45,6 +45,7 @@ export interface PortfolioCompany {
   sys: { id: string };
   fields: {
     name: string;
+    slug?: string;
     logo?: ContentfulAsset;
     website?: string;
     sector: string;

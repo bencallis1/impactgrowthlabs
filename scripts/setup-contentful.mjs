@@ -182,6 +182,20 @@ const CONTENT_TYPES = [
     displayField: "name",
     fields: [
       symbol("name", "Company Name", { required: true }),
+      {
+        id: "slug",
+        name: "Slug",
+        type: "Symbol",
+        required: true,
+        helpText: "URL-safe identifier, e.g. greentech-solutions. Must be unique.",
+        validations: [
+          { unique: true },
+          {
+            regexp: { pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$", flags: "" },
+            message: "Use only lowercase letters, numbers, and hyphens (e.g. greentech-solutions).",
+          },
+        ],
+      },
       asset("logo", "Logo"),
       symbol("website", "Website URL", {
         validations: [

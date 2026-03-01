@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const footerLinks = {
   Studio: [
-    { label: "Portfolio", href: "/#portfolio" },
+    { label: "Portfolio", href: "/portfolio" },
     { label: "Team", href: "/#team" },
     { label: "Services", href: "/#services" },
   ],

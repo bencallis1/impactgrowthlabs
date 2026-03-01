@@ -55,6 +55,8 @@ export function Portfolio({ companies }: { companies: PortfolioCompany[] }) {
               ? Object.entries(company.fields.metrics).slice(0, 2)
               : [];
 
+            const slug = company.fields.slug ?? "#";
+
             return (
               <motion.div
                 key={company.sys.id}
@@ -65,41 +67,45 @@ export function Portfolio({ companies }: { companies: PortfolioCompany[] }) {
                   delay: i * 0.1,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className="rounded-2xl bg-white border border-gray-100 p-6 hover:shadow-xl hover:-translate-y-1 hover:border-[#52B788]/30 transition-all duration-300 group flex flex-col"
               >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="h-12 w-12 rounded-xl bg-[#1A3A2E] flex items-center justify-center text-[#95D5B2] group-hover:bg-[#2D6A4F] transition-colors duration-300">
-                    <Icon size={20} />
+                <Link
+                  href={`/portfolio/${slug}`}
+                  className="block rounded-2xl bg-white border border-gray-100 p-6 hover:shadow-xl hover:-translate-y-1 hover:border-[#52B788]/30 transition-all duration-300 group flex flex-col h-full"
+                >
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="h-12 w-12 rounded-xl bg-[#1A3A2E] flex items-center justify-center text-[#95D5B2] group-hover:bg-[#2D6A4F] transition-colors duration-300">
+                      <Icon size={20} />
+                    </div>
+                    <span
+                      className={`text-xs font-medium px-2.5 py-1 rounded-full border ${colorClass}`}
+                    >
+                      {company.fields.stage}
+                    </span>
                   </div>
-                  <span
-                    className={`text-xs font-medium px-2.5 py-1 rounded-full border ${colorClass}`}
-                  >
-                    {company.fields.stage}
-                  </span>
-                </div>
-                <h3 className="font-semibold text-[#1A3A2E] text-lg mb-2 group-hover:text-[#2D6A4F] transition-colors">
-                  {company.fields.name}
-                </h3>
-                <p className="text-sm text-[#0F1A14]/60 leading-relaxed mb-4 flex-1">
-                  {company.fields.description}
-                </p>
-                {/* Metrics chips */}
-                {metricEntries.length > 0 ? (
-                  <div className="flex flex-wrap gap-2 pt-4 border-t border-gray-100">
-                    {metricEntries.map(([, val]) => (
-                      <span
-                        key={String(val)}
-                        className="text-xs bg-[#F7FAF8] text-[#2D6A4F] font-medium px-2.5 py-1 rounded-full border border-[#52B788]/20"
-                      >
-                        {String(val)}
-                      </span>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="pt-4 border-t border-gray-100">
-                    <span className="text-xs text-[#52B788] font-medium">{sector}</span>
-                  </div>
-                )}
+                  <h3 className="font-semibold text-[#1A3A2E] text-lg mb-2 group-hover:text-[#2D6A4F] transition-colors">
+                    {company.fields.name}
+                  </h3>
+                  <p className="text-sm text-[#0F1A14]/60 leading-relaxed mb-4 flex-1">
+                    {company.fields.description}
+                  </p>
+                  {/* Metrics chips */}
+                  {metricEntries.length > 0 ? (
+                    <div className="flex flex-wrap gap-2 pt-4 border-t border-gray-100">
+                      {metricEntries.map(([, val]) => (
+                        <span
+                          key={String(val)}
+                          className="text-xs bg-[#F7FAF8] text-[#2D6A4F] font-medium px-2.5 py-1 rounded-full border border-[#52B788]/20"
+                        >
+                          {String(val)}
+                        </span>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="pt-4 border-t border-gray-100">
+                      <span className="text-xs text-[#52B788] font-medium">{sector}</span>
+                    </div>
+                  )}
+                </Link>
               </motion.div>
             );
           })}
