@@ -32,13 +32,37 @@ export const metadata: Metadata = {
       {
         url: 'https://imagedelivery.net/lcKdEvt7ci2YjdeNVK02Iw/f4ccd60a-e2bc-47cf-edfc-2ea980636500/Originals', // Must be an absolute URL
         width: 1800,
-        height: 1600,
+        height: 1000,
         alt: 'Impact Growth Labs OG Image',
       },
     ],
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Impact Growth Labs',
+    description: 'An impact venture studio backing founders who build a better world',
+    siteId: '1467726470533754880',
+    creator: '@nextjs',
+    creatorId: '1467726470533754880',
+    images: ['https://imagedelivery.net/lcKdEvt7ci2YjdeNVK02Iw/f4ccd60a-e2bc-47cf-edfc-2ea980636500/Originals'], // Must be an absolute URL
+  },
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      noimageindex: false,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 
 };
+
+
 
 
 
