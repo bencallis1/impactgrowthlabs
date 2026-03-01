@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, Leaf, Heart, BookOpen, Recycle } from "lucide-react";
 import type { PortfolioCompany } from "@/types/contentful";
+import { stripMarkdown } from "@/components/ui/MarkdownRenderer";
 
 const sectorIcons: Record<string, React.ElementType> = {
   Climate: Leaf,
@@ -68,7 +69,7 @@ export function PortfolioCard({ company }: { company: PortfolioCompany }) {
       {/* Body */}
       <div className="p-6 flex flex-col flex-1">
         <p className="text-sm text-[#0F1A14]/60 leading-relaxed line-clamp-3 mb-4 flex-1">
-          {company.fields.description}
+          {stripMarkdown(company.fields.description)}
         </p>
 
         {/* Metrics */}

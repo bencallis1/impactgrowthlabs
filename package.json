@@ -7,10 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "setup:contentful": "node --env-file=.env.local scripts/setup-contentful.mjs"
+    "setup:contentful": "node --env-file=.env.local scripts/setup-contentful.mjs",
+    "deploy": "vercel"
   },
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^16.1.6",
+    "@contentful/rich-text-types": "^16.8.5",
     "@hookform/resolvers": "^5.2.2",
     "@tailwindcss/typography": "^0.5.19",
     "@types/bcryptjs": "^2.4.6",
@@ -37,6 +39,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vercel": "^50.25.4"
   }
 }

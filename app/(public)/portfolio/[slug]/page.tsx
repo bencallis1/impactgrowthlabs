@@ -11,6 +11,7 @@ import {
   Recycle,
 } from "lucide-react";
 import { getPortfolioCompany, getPortfolioCompanies } from "@/lib/contentful";
+import { MarkdownRenderer } from "@/components/ui/MarkdownRenderer";
 
 export const revalidate = 3600;
 
@@ -147,27 +148,24 @@ export default async function PortfolioCompanyPage({
             <h2 className="font-serif text-2xl text-[#1A3A2E] mb-5">
               About {company.fields.name}
             </h2>
-            <p className="text-[#0F1A14]/70 leading-relaxed text-lg">
-              {company.fields.description}
-            </p>
+            <MarkdownRenderer content={company.fields.description} />
+            {company.fields.impactThesis && (
+              <>
+                <h2 className="font-serif text-2xl text-[#1A3A2E] mt-8 mb-3">
+                  Our Investment Thesis
+                </h2>
+                <MarkdownRenderer content={company.fields.impactThesis} />
+              </>
+            )}
 
             {/* CTA bar */}
             <div className="mt-12 flex flex-col sm:flex-row gap-4">
-              <Link
-                href="/apply"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#1A3A2E] px-7 py-3.5 text-sm font-medium text-white hover:bg-[#2D6A4F] transition-colors group"
-              >
-                Apply as a Founder
-                <ArrowRight
-                  size={16}
-                  className="group-hover:translate-x-1 transition-transform"
-                />
-              </Link>
+     
               <Link
                 href="/case-studies"
                 className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-[#1A3A2E] px-7 py-3.5 text-sm font-medium text-[#1A3A2E] hover:bg-[#1A3A2E] hover:text-white transition-all"
               >
-                View Case Studies
+                View Related Case Studies
               </Link>
             </div>
           </div>

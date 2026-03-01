@@ -6,6 +6,10 @@ import type {
   TeamMember,
   PortalDocument,
   PortalNewsItem,
+  Testimonial,
+  PressItem,
+  FAQ,
+  JobPosting,
 } from "@/types/contentful";
 
 // ---------------------------------------------------------------------------
@@ -37,6 +41,8 @@ const MOCK_BLOG_POSTS: BlogPost[] = [
       author: "Sarah Chen",
       publishedDate: "2025-01-15",
       tags: ["Impact Investing", "Trends", "ESG"],
+      featured: true,
+      readTimeMinutes: 6,
     },
   },
   {
@@ -50,6 +56,7 @@ const MOCK_BLOG_POSTS: BlogPost[] = [
       author: "Marcus Williams",
       publishedDate: "2025-02-01",
       tags: ["Climate", "Portfolio", "Impact"],
+      readTimeMinutes: 8,
     },
   },
   {
@@ -63,9 +70,52 @@ const MOCK_BLOG_POSTS: BlogPost[] = [
       author: "Priya Patel",
       publishedDate: "2025-02-20",
       tags: ["Diversity", "Founders", "Research"],
+      readTimeMinutes: 5,
     },
   },
 ];
+
+// Note: MOCK_CASE_STUDIES is defined after MOCK_PORTFOLIO so companyRef can
+// reference the already-constructed portfolio objects directly.
+const MOCK_PORTFOLIO_GREENTECH: PortfolioCompany = {
+  sys: { id: "1" },
+  fields: {
+    name: "GreenTech Solutions",
+    slug: "greentech-solutions",
+    sector: "Climate",
+    stage: "Series A",
+    description:
+      "GreenTech Solutions has built an AI-powered platform that helps manufacturers and logistics companies map, measure, and reduce the carbon footprint across their entire supply chain.",
+    website: "https://greentechsolutions.example",
+    metrics: { "Carbon Reduced": "40%", "Facilities Served": "120", "Tonnes CO₂ Avoided": "2.4M" },
+    featured: true,
+    location: "San Francisco, CA",
+    investmentDate: "2022-06-01",
+    foundingYear: 2020,
+    sdgs: ["13 Climate Action", "9 Industry & Innovation"],
+    impactThesis:
+      "Decarbonizing industrial supply chains is one of the highest-leverage interventions available. GreenTech Solutions targets scope 3 emissions — the hardest to measure and the largest share of most companies' footprint.",
+  },
+};
+
+const MOCK_PORTFOLIO_HEALTHBRIDGE: PortfolioCompany = {
+  sys: { id: "2" },
+  fields: {
+    name: "HealthBridge",
+    slug: "healthbridge",
+    sector: "Health",
+    stage: "Seed",
+    description:
+      "HealthBridge delivers telemedicine and digital health services to underserved communities across six emerging markets via low-bandwidth mobile interfaces.",
+    website: "https://healthbridge.example",
+    metrics: { "Patients Served": "100K+", "Countries": "6", "Avg. Cost per Visit": "$2.80" },
+    featured: true,
+    location: "Nairobi, Kenya",
+    investmentDate: "2023-01-15",
+    foundingYear: 2021,
+    sdgs: ["3 Good Health", "10 Reduced Inequalities"],
+  },
+};
 
 const MOCK_CASE_STUDIES: CaseStudy[] = [
   {
@@ -77,8 +127,11 @@ const MOCK_CASE_STUDIES: CaseStudy[] = [
         "How we helped GreenTech Solutions scale from a prototype to a platform used by 120 manufacturing facilities — reducing scope 3 emissions by 40%.",
       body: { nodeType: "document", data: {}, content: [] } as never,
       company: "GreenTech Solutions",
+      companyRef: MOCK_PORTFOLIO_GREENTECH,
       impactSummary: "40% carbon reduction across 120 facilities, 85,000 tCO₂e avoided annually.",
       publishedDate: "2024-09-01",
+      featured: true,
+      sdgs: ["13 Climate Action", "9 Industry & Innovation", "12 Responsible Consumption"],
     },
   },
   {
@@ -90,37 +143,17 @@ const MOCK_CASE_STUDIES: CaseStudy[] = [
         "HealthBridge used telemedicine to connect rural communities in sub-Saharan Africa with specialist care — reaching 100K patients in under 18 months.",
       body: { nodeType: "document", data: {}, content: [] } as never,
       company: "HealthBridge",
+      companyRef: MOCK_PORTFOLIO_HEALTHBRIDGE,
       impactSummary: "100,000 patients served across 6 countries, 90% cost reduction vs. traditional care.",
       publishedDate: "2024-11-01",
+      sdgs: ["3 Good Health", "10 Reduced Inequalities"],
     },
   },
 ];
 
 const MOCK_PORTFOLIO: PortfolioCompany[] = [
-  {
-    sys: { id: "1" },
-    fields: {
-      name: "GreenTech Solutions",
-      slug: "greentech-solutions",
-      sector: "Climate",
-      stage: "Series A",
-      description: "GreenTech Solutions has built an AI-powered platform that helps manufacturers and logistics companies map, measure, and reduce the carbon footprint across their entire supply chain. By integrating with existing ERP systems and shipping APIs, they surface actionable decarbonization opportunities at every tier of the supply chain — from raw material sourcing to last-mile delivery.",
-      website: "https://greentechsolutions.example",
-      metrics: { "Carbon Reduced": "40%", "Facilities Served": "120", "Tonnes CO₂ Avoided": "2.4M" },
-    },
-  },
-  {
-    sys: { id: "2" },
-    fields: {
-      name: "HealthBridge",
-      slug: "healthbridge",
-      sector: "Health",
-      stage: "Seed",
-      description: "HealthBridge delivers telemedicine and digital health services to underserved communities across six emerging markets. Their platform connects patients in rural and peri-urban areas with licensed clinicians via low-bandwidth mobile interfaces, reducing the need for costly and often inaccessible in-person visits. HealthBridge also partners with local community health workers to coordinate care continuity and chronic disease management.",
-      website: "https://healthbridge.example",
-      metrics: { "Patients Served": "100K+", "Countries": "6", "Avg. Cost per Visit": "$2.80" },
-    },
-  },
+  MOCK_PORTFOLIO_GREENTECH,
+  MOCK_PORTFOLIO_HEALTHBRIDGE,
   {
     sys: { id: "3" },
     fields: {
@@ -128,9 +161,14 @@ const MOCK_PORTFOLIO: PortfolioCompany[] = [
       slug: "eduaccess",
       sector: "Education",
       stage: "Series A",
-      description: "EduAccess is an adaptive learning platform purpose-built for first-generation college students in the United States. By combining AI-driven personalized learning paths with peer mentorship networks and wraparound support services, EduAccess addresses the structural barriers that lead to high dropout rates among underrepresented students. Their data shows a 28-point improvement in graduation rates among platform users.",
+      description:
+        "EduAccess is an adaptive learning platform purpose-built for first-generation college students in the United States, combining AI-driven personalized learning with peer mentorship.",
       website: "https://eduaccess.example",
       metrics: { "Students Supported": "45K", "Graduation Rate Lift": "+28%", "Partner Institutions": "38" },
+      location: "New York, NY",
+      investmentDate: "2022-09-01",
+      foundingYear: 2019,
+      sdgs: ["4 Quality Education", "10 Reduced Inequalities"],
     },
   },
   {
@@ -140,9 +178,14 @@ const MOCK_PORTFOLIO: PortfolioCompany[] = [
       slug: "circular-materials",
       sector: "Circular Economy",
       stage: "Seed",
-      description: "CircularMaterials diverts post-consumer plastic and textile waste from landfills and transforms it into industrial-grade materials for construction, packaging, and automotive applications. Their proprietary processing technology produces materials that meet or exceed the performance specifications of virgin feedstocks — at a fraction of the environmental cost. They currently operate two processing facilities and supply 34 manufacturing partners.",
+      description:
+        "CircularMaterials diverts post-consumer plastic and textile waste from landfills and transforms it into industrial-grade materials for construction, packaging, and automotive applications.",
       website: "https://circularmaterials.example",
       metrics: { "Waste Processed": "12K tonnes", "Manufacturing Partners": "34", "Material SKUs": "18" },
+      location: "Amsterdam, Netherlands",
+      investmentDate: "2023-06-01",
+      foundingYear: 2022,
+      sdgs: ["12 Responsible Consumption", "13 Climate Action", "9 Industry & Innovation"],
     },
   },
 ];
@@ -154,7 +197,9 @@ const MOCK_TEAM: TeamMember[] = [
       name: "Sarah Chen",
       role: "Co-Founder & CEO",
       bio: "Former partner at a top-tier impact fund with 15 years building and scaling mission-driven companies across Southeast Asia and North America.",
-      linkedIn: "https://linkedin.com",
+      linkedIn: "https://www.linkedin.com/in/sarah-chen",
+      sortOrder: 1,
+      featured: true,
     },
   },
   {
@@ -163,7 +208,9 @@ const MOCK_TEAM: TeamMember[] = [
       name: "Marcus Williams",
       role: "Co-Founder & COO",
       bio: "Ex-McKinsey and World Bank. Led operational transformations for social enterprises in 20+ countries, from early-stage to growth.",
-      linkedIn: "https://linkedin.com",
+      linkedIn: "https://www.linkedin.com/in/marcus-williams",
+      sortOrder: 2,
+      featured: true,
     },
   },
   {
@@ -172,7 +219,9 @@ const MOCK_TEAM: TeamMember[] = [
       name: "Priya Patel",
       role: "Head of Impact",
       bio: "PhD in Environmental Science. Designed impact measurement frameworks now used by 200+ funds globally. Former UNDP climate advisor.",
-      linkedIn: "https://linkedin.com",
+      linkedIn: "https://www.linkedin.com/in/priya-patel",
+      sortOrder: 3,
+      featured: true,
     },
   },
 ];
@@ -183,7 +232,12 @@ const MOCK_PORTAL_DOCS: PortalDocument[] = [
     fields: {
       title: "Q4 2024 Portfolio Update",
       description: "Quarterly update covering portfolio performance, key milestones, and upcoming opportunities.",
-      file: { fields: { title: "Q4 2024 Update", file: { url: "#", details: { size: 2048000 }, fileName: "q4-2024-update.pdf", contentType: "application/pdf" } } },
+      file: {
+        fields: {
+          title: "Q4 2024 Update",
+          file: { url: "#", details: { size: 2048000 }, fileName: "q4-2024-update.pdf", contentType: "application/pdf" },
+        },
+      },
       publishedDate: "2025-01-15",
       category: "Quarterly Report",
     },
@@ -193,7 +247,12 @@ const MOCK_PORTAL_DOCS: PortalDocument[] = [
     fields: {
       title: "2024 Annual Impact Report",
       description: "Comprehensive review of impact outcomes across all portfolio companies for fiscal year 2024.",
-      file: { fields: { title: "Annual Impact Report", file: { url: "#", details: { size: 5120000 }, fileName: "2024-impact-report.pdf", contentType: "application/pdf" } } },
+      file: {
+        fields: {
+          title: "Annual Impact Report",
+          file: { url: "#", details: { size: 5120000 }, fileName: "2024-impact-report.pdf", contentType: "application/pdf" },
+        },
+      },
       publishedDate: "2025-02-01",
       category: "Impact Report",
     },
@@ -203,7 +262,12 @@ const MOCK_PORTAL_DOCS: PortalDocument[] = [
     fields: {
       title: "Fund II Term Sheet",
       description: "Term sheet and key terms for Impact Growth Labs Fund II.",
-      file: { fields: { title: "Fund II Terms", file: { url: "#", details: { size: 512000 }, fileName: "fund-ii-terms.pdf", contentType: "application/pdf" } } },
+      file: {
+        fields: {
+          title: "Fund II Terms",
+          file: { url: "#", details: { size: 512000 }, fileName: "fund-ii-terms.pdf", contentType: "application/pdf" },
+        },
+      },
       publishedDate: "2024-11-15",
       category: "Legal",
     },
@@ -215,7 +279,8 @@ const MOCK_PORTAL_NEWS: PortalNewsItem[] = [
     sys: { id: "1" },
     fields: {
       title: "GreenTech Solutions Closes $12M Series A",
-      summary: "GreenTech Solutions announced the close of its $12M Series A round led by Clean Energy Ventures, with participation from Impact Growth Labs.",
+      summary:
+        "GreenTech Solutions announced the close of its $12M Series A round led by Clean Energy Ventures, with participation from Impact Growth Labs.",
       company: "GreenTech Solutions",
       publishedDate: "2025-02-10",
       link: "#",
@@ -225,7 +290,8 @@ const MOCK_PORTAL_NEWS: PortalNewsItem[] = [
     sys: { id: "2" },
     fields: {
       title: "HealthBridge Expands to West Africa",
-      summary: "HealthBridge launched operations in Ghana and Nigeria, bringing its telemedicine platform to two new high-need markets.",
+      summary:
+        "HealthBridge launched operations in Ghana and Nigeria, bringing its telemedicine platform to two new high-need markets.",
       company: "HealthBridge",
       publishedDate: "2025-01-28",
       link: "#",
@@ -235,10 +301,111 @@ const MOCK_PORTAL_NEWS: PortalNewsItem[] = [
     sys: { id: "3" },
     fields: {
       title: "EduAccess Partners with Three State University Systems",
-      summary: "EduAccess signed MOUs with university systems in Texas, Ohio, and Georgia to expand access for first-generation students.",
+      summary:
+        "EduAccess signed MOUs with university systems in Texas, Ohio, and Georgia to expand access for first-generation students.",
       company: "EduAccess",
       publishedDate: "2025-01-10",
       link: "#",
+    },
+  },
+];
+
+const MOCK_TESTIMONIALS: Testimonial[] = [
+  {
+    sys: { id: "1" },
+    fields: {
+      quote:
+        "Impact Growth Labs didn't just write a check — they rolled up their sleeves. Their network opened doors we couldn't have reached on our own, and their guidance on impact measurement gave us the credibility to close a Series A in a tough market.",
+      authorName: "Aisha Mwangi",
+      authorRole: "CEO & Co-Founder",
+      company: "HealthBridge",
+      featured: true,
+      publishedDate: "2024-11-01",
+    },
+  },
+  {
+    sys: { id: "2" },
+    fields: {
+      quote:
+        "What sets Impact Growth Labs apart is the depth of their conviction. They understand that building for underserved markets requires a longer arc — and they're patient partners who measure success the same way we do.",
+      authorName: "Jordan Lee",
+      authorRole: "CEO",
+      company: "EduAccess",
+      featured: true,
+      publishedDate: "2024-09-01",
+    },
+  },
+];
+
+const MOCK_PRESS_ITEMS: PressItem[] = [
+  {
+    sys: { id: "1" },
+    fields: {
+      title: "The Quiet Rise of Impact Venture: How a New Breed of Studio Is Changing the Game",
+      publication: "Forbes",
+      excerpt:
+        "Impact Growth Labs represents a new model — one where venture returns and measurable social outcomes aren't competing priorities.",
+      url: "#",
+      publishedDate: "2025-01-20",
+      featured: true,
+    },
+  },
+  {
+    sys: { id: "2" },
+    fields: {
+      title: "25 Impact Investors to Watch in 2025",
+      publication: "Fast Company",
+      excerpt: "Impact Growth Labs earns a spot for its disciplined approach to backing founders at the climate-health nexus.",
+      url: "#",
+      publishedDate: "2025-02-05",
+      featured: true,
+    },
+  },
+];
+
+const MOCK_FAQS: FAQ[] = [
+  {
+    sys: { id: "1" },
+    fields: {
+      question: "What stage do you invest in?",
+      answer: { nodeType: "document", data: {}, content: [] } as never,
+      category: "Investing",
+      sortOrder: 1,
+    },
+  },
+  {
+    sys: { id: "2" },
+    fields: {
+      question: "What sectors do you focus on?",
+      answer: { nodeType: "document", data: {}, content: [] } as never,
+      category: "Investing",
+      sortOrder: 2,
+    },
+  },
+  {
+    sys: { id: "3" },
+    fields: {
+      question: "How do you measure impact?",
+      answer: { nodeType: "document", data: {}, content: [] } as never,
+      category: "Impact",
+      sortOrder: 1,
+    },
+  },
+];
+
+const MOCK_JOB_POSTINGS: JobPosting[] = [
+  {
+    sys: { id: "1" },
+    fields: {
+      title: "Principal, Climate & Circular Economy",
+      slug: "principal-climate-circular-economy",
+      team: "Investments",
+      location: "San Francisco, CA (Hybrid)",
+      type: "Full-time",
+      description: { nodeType: "document", data: {}, content: [] } as never,
+      applicationUrl: "#",
+      publishedDate: "2025-02-01",
+      active: true,
     },
   },
 ];
@@ -283,6 +450,21 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
   }
 }
 
+export async function getFeaturedBlogPosts(): Promise<BlogPost[]> {
+  const client = getClient() as AnyClient | null;
+  if (!client) return MOCK_BLOG_POSTS.filter((p) => p.fields.featured);
+  try {
+    const res = await client.getEntries({
+      content_type: "blogPost",
+      "fields.featured": true,
+      order: ["-fields.publishedDate"],
+    });
+    return res.items.length ? (res.items as unknown as BlogPost[]) : MOCK_BLOG_POSTS.filter((p) => p.fields.featured);
+  } catch {
+    return MOCK_BLOG_POSTS.filter((p) => p.fields.featured);
+  }
+}
+
 export async function getCaseStudies(): Promise<CaseStudy[]> {
   const client = getClient() as AnyClient | null;
   if (!client) return MOCK_CASE_STUDIES;
@@ -311,6 +493,49 @@ export async function getCaseStudy(slug: string): Promise<CaseStudy | null> {
       : (MOCK_CASE_STUDIES.find((c) => c.fields.slug === slug) ?? null);
   } catch {
     return MOCK_CASE_STUDIES.find((c) => c.fields.slug === slug) ?? null;
+  }
+}
+
+/**
+ * Fetch all case studies linked to a specific portfolio company.
+ *
+ * Uses a reverse lookup via the `companyRef` field on caseStudy entries —
+ * this is the canonical relationship between the two content types. A case
+ * study is considered "connected" to a company only when its `companyRef`
+ * field resolves to that company entry.
+ *
+ * @param companyId - The Contentful sys.id of the portfolio company.
+ *                    Use `company.sys.id` after fetching via getPortfolioCompany().
+ *
+ * @example
+ * const company = await getPortfolioCompany("greentech-solutions")
+ * if (company) {
+ *   const studies = await getCaseStudiesForCompany(company.sys.id)
+ * }
+ */
+export async function getCaseStudiesForCompany(companyId: string): Promise<CaseStudy[]> {
+  const client = getClient() as AnyClient | null;
+  if (!client) {
+    // In mock mode, match by sys.id on the resolved companyRef
+    return MOCK_CASE_STUDIES.filter(
+      (cs) => cs.fields.companyRef?.sys.id === companyId
+    );
+  }
+  try {
+    // Contentful reverse-link query: find caseStudy entries where companyRef
+    // links to the given entry ID. The `include: 2` parameter resolves the
+    // companyRef entry inline so callers get the full PortfolioCompany object.
+    const res = await client.getEntries({
+      content_type: "caseStudy",
+      "fields.companyRef.sys.id": companyId,
+      order: ["-fields.publishedDate"],
+      include: 2,
+    });
+    return res.items.length
+      ? (res.items as unknown as CaseStudy[])
+      : MOCK_CASE_STUDIES.filter((cs) => cs.fields.companyRef?.sys.id === companyId);
+  } catch {
+    return MOCK_CASE_STUDIES.filter((cs) => cs.fields.companyRef?.sys.id === companyId);
   }
 }
 
@@ -345,13 +570,30 @@ export async function getPortfolioCompany(slug: string): Promise<PortfolioCompan
   }
 }
 
+export async function getFeaturedPortfolioCompanies(): Promise<PortfolioCompany[]> {
+  const client = getClient() as AnyClient | null;
+  if (!client) return MOCK_PORTFOLIO.filter((c) => c.fields.featured);
+  try {
+    const res = await client.getEntries({
+      content_type: "portfolioCompany",
+      "fields.featured": true,
+      order: ["fields.name"],
+    });
+    return res.items.length
+      ? (res.items as unknown as PortfolioCompany[])
+      : MOCK_PORTFOLIO.filter((c) => c.fields.featured);
+  } catch {
+    return MOCK_PORTFOLIO.filter((c) => c.fields.featured);
+  }
+}
+
 export async function getTeamMembers(): Promise<TeamMember[]> {
   const client = getClient() as AnyClient | null;
   if (!client) return MOCK_TEAM;
   try {
     const res = await client.getEntries({
       content_type: "teamMember",
-      order: ["fields.name"],
+      order: ["fields.sortOrder", "fields.name"],
     });
     return res.items.length ? (res.items as unknown as TeamMember[]) : MOCK_TEAM;
   } catch {
@@ -384,5 +626,103 @@ export async function getPortalNews(): Promise<PortalNewsItem[]> {
     return res.items.length ? (res.items as unknown as PortalNewsItem[]) : MOCK_PORTAL_NEWS;
   } catch {
     return MOCK_PORTAL_NEWS;
+  }
+}
+
+export async function getTestimonials(): Promise<Testimonial[]> {
+  const client = getClient() as AnyClient | null;
+  if (!client) return MOCK_TESTIMONIALS;
+  try {
+    const res = await client.getEntries({
+      content_type: "testimonial",
+      order: ["-fields.publishedDate"],
+    });
+    return res.items.length ? (res.items as unknown as Testimonial[]) : MOCK_TESTIMONIALS;
+  } catch {
+    return MOCK_TESTIMONIALS;
+  }
+}
+
+export async function getFeaturedTestimonials(): Promise<Testimonial[]> {
+  const client = getClient() as AnyClient | null;
+  if (!client) return MOCK_TESTIMONIALS.filter((t) => t.fields.featured);
+  try {
+    const res = await client.getEntries({
+      content_type: "testimonial",
+      "fields.featured": true,
+      order: ["-fields.publishedDate"],
+    });
+    return res.items.length
+      ? (res.items as unknown as Testimonial[])
+      : MOCK_TESTIMONIALS.filter((t) => t.fields.featured);
+  } catch {
+    return MOCK_TESTIMONIALS.filter((t) => t.fields.featured);
+  }
+}
+
+export async function getPressItems(): Promise<PressItem[]> {
+  const client = getClient() as AnyClient | null;
+  if (!client) return MOCK_PRESS_ITEMS;
+  try {
+    const res = await client.getEntries({
+      content_type: "pressItem",
+      order: ["-fields.publishedDate"],
+    });
+    return res.items.length ? (res.items as unknown as PressItem[]) : MOCK_PRESS_ITEMS;
+  } catch {
+    return MOCK_PRESS_ITEMS;
+  }
+}
+
+export async function getFaqs(category?: string): Promise<FAQ[]> {
+  const client = getClient() as AnyClient | null;
+  if (!client) {
+    return category ? MOCK_FAQS.filter((f) => f.fields.category === category) : MOCK_FAQS;
+  }
+  try {
+    const query: Record<string, unknown> = {
+      content_type: "faq",
+      order: ["fields.category", "fields.sortOrder"],
+    };
+    if (category) query["fields.category"] = category;
+    const res = await client.getEntries(query);
+    return res.items.length ? (res.items as unknown as FAQ[]) : MOCK_FAQS;
+  } catch {
+    return MOCK_FAQS;
+  }
+}
+
+export async function getJobPostings(activeOnly = true): Promise<JobPosting[]> {
+  const client = getClient() as AnyClient | null;
+  if (!client) {
+    return activeOnly ? MOCK_JOB_POSTINGS.filter((j) => j.fields.active) : MOCK_JOB_POSTINGS;
+  }
+  try {
+    const query: Record<string, unknown> = {
+      content_type: "jobPosting",
+      order: ["-fields.publishedDate"],
+    };
+    if (activeOnly) query["fields.active"] = true;
+    const res = await client.getEntries(query);
+    return res.items.length ? (res.items as unknown as JobPosting[]) : MOCK_JOB_POSTINGS;
+  } catch {
+    return MOCK_JOB_POSTINGS;
+  }
+}
+
+export async function getJobPosting(slug: string): Promise<JobPosting | null> {
+  const client = getClient() as AnyClient | null;
+  if (!client) return MOCK_JOB_POSTINGS.find((j) => j.fields.slug === slug) ?? null;
+  try {
+    const res = await client.getEntries({
+      content_type: "jobPosting",
+      "fields.slug": slug,
+      limit: 1,
+    });
+    return res.items.length
+      ? (res.items[0] as unknown as JobPosting)
+      : (MOCK_JOB_POSTINGS.find((j) => j.fields.slug === slug) ?? null);
+  } catch {
+    return MOCK_JOB_POSTINGS.find((j) => j.fields.slug === slug) ?? null;
   }
 }

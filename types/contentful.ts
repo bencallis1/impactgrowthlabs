@@ -1,5 +1,9 @@
 import type { Document } from "@contentful/rich-text-types";
 
+// ---------------------------------------------------------------------------
+// Shared
+// ---------------------------------------------------------------------------
+
 export interface ContentfulAsset {
   fields: {
     title: string;
@@ -13,6 +17,10 @@ export interface ContentfulAsset {
   };
 }
 
+// ---------------------------------------------------------------------------
+// Blog Post
+// ---------------------------------------------------------------------------
+
 export interface BlogPost {
   sys: { id: string; createdAt: string; updatedAt: string };
   fields: {
@@ -21,11 +29,22 @@ export interface BlogPost {
     excerpt: string;
     body: Document;
     coverImage?: ContentfulAsset;
+    /** Plain-text author name — kept for backward compatibility */
     author: string;
     publishedDate: string;
     tags?: string[];
+    // New fields
+    /** Linked TeamMember entry — preferred over plain-text author */
+    authorRef?: TeamMember;
+    relatedPosts?: BlogPost[];
+    featured?: boolean;
+    readTimeMinutes?: number;
   };
 }
+
+// ---------------------------------------------------------------------------
+// Case Study
+// ---------------------------------------------------------------------------
 
 export interface CaseStudy {
   sys: { id: string; createdAt: string; updatedAt: string };
@@ -35,11 +54,22 @@ export interface CaseStudy {
     excerpt: string;
     body: Document;
     coverImage?: ContentfulAsset;
+    /** Plain-text company name — kept for backward compatibility */
     company: string;
     impactSummary: string;
     publishedDate: string;
+    // New fields
+    /** Linked PortfolioCompany entry — preferred over plain-text company */
+    companyRef?: PortfolioCompany;
+    featured?: boolean;
+    sdgs?: string[];
+    videoUrl?: string;
   };
 }
+
+// ---------------------------------------------------------------------------
+// Portfolio Company
+// ---------------------------------------------------------------------------
 
 export interface PortfolioCompany {
   sys: { id: string };
@@ -52,8 +82,19 @@ export interface PortfolioCompany {
     stage: string;
     description: string;
     metrics?: Record<string, string | number>;
+    // New fields
+    featured?: boolean;
+    location?: string;
+    investmentDate?: string;
+    foundingYear?: number;
+    sdgs?: string[];
+    impactThesis?: string;
   };
 }
+
+// ---------------------------------------------------------------------------
+// Team Member
+// ---------------------------------------------------------------------------
 
 export interface TeamMember {
   sys: { id: string };
@@ -63,8 +104,16 @@ export interface TeamMember {
     bio: string;
     photo?: ContentfulAsset;
     linkedIn?: string;
+    // New fields
+    twitter?: string;
+    sortOrder?: number;
+    featured?: boolean;
   };
 }
+
+// ---------------------------------------------------------------------------
+// Portal Document
+// ---------------------------------------------------------------------------
 
 export interface PortalDocument {
   sys: { id: string };
@@ -77,13 +126,87 @@ export interface PortalDocument {
   };
 }
 
+// ---------------------------------------------------------------------------
+// Portal News Item
+// ---------------------------------------------------------------------------
+
 export interface PortalNewsItem {
   sys: { id: string };
   fields: {
     title: string;
     summary: string;
+    /** Plain-text company name — kept for backward compatibility */
     company: string;
     publishedDate: string;
     link?: string;
+    // New fields
+    companyRef?: PortfolioCompany;
+  };
+}
+
+// ---------------------------------------------------------------------------
+// Testimonial (new)
+// ---------------------------------------------------------------------------
+
+export interface Testimonial {
+  sys: { id: string };
+  fields: {
+    quote: string;
+    authorName: string;
+    authorRole: string;
+    company?: string;
+    avatar?: ContentfulAsset;
+    featured?: boolean;
+    publishedDate?: string;
+  };
+}
+
+// ---------------------------------------------------------------------------
+// Press Item (new)
+// ---------------------------------------------------------------------------
+
+export interface PressItem {
+  sys: { id: string };
+  fields: {
+    title: string;
+    publication: string;
+    excerpt?: string;
+    url: string;
+    publicationLogo?: ContentfulAsset;
+    publishedDate: string;
+    featured?: boolean;
+  };
+}
+
+// ---------------------------------------------------------------------------
+// FAQ (new)
+// ---------------------------------------------------------------------------
+
+export interface FAQ {
+  sys: { id: string };
+  fields: {
+    question: string;
+    answer: Document;
+    category?: string;
+    sortOrder?: number;
+  };
+}
+
+// ---------------------------------------------------------------------------
+// Job Posting (new)
+// ---------------------------------------------------------------------------
+
+export interface JobPosting {
+  sys: { id: string };
+  fields: {
+    title: string;
+    slug: string;
+    team?: string;
+    location?: string;
+    type?: string;
+    description: Document;
+    applicationUrl?: string;
+    publishedDate: string;
+    active?: boolean;
   };
 }
