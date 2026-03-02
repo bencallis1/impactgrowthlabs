@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image"
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, BookOpen, FileText, LinkedinIcon, Twitter } from "lucide-react";
@@ -54,14 +55,32 @@ function formatDate(dateStr: string) {
   });
 }
 
+function getAssetUrl(asset:object): string | null {
+
+  const maybeAsset = asset as {
+    fields?: { file?: { url?: unknown } };
+  };
+
+  const url = asset.fields.photo.fields.file.url;
+  console.log('THE URL',url)
+  console.log('the asset', url.startsWith("//") ? `https:${url}` : url)
+
+
+  // if (typeof url !== "string" || url.length === 0) return null;
+
+  return url.startsWith("//") ? `https:${url}` : url;
+}
+
 export default async function TeamMemberPage({ params }: Props) {
   const { slug } = await params;
 
   const member = await getTeamMember(slug);
   if (!member) notFound();
 
-  const { name, role, bio, memberType, linkedIn, twitter } = member.fields;
+  const { name, role, bio, memberType, linkedIn, twitter, photo } = member.fields;
   const isRichTextBio = typeof bio === "object" && bio !== null;
+
+  console.log('the photo', photo?.fields.file.url)
 
   // Fetch related writing in parallel
   const [blogPosts, caseStudies] = await Promise.all([
@@ -89,11 +108,15 @@ export default async function TeamMemberPage({ params }: Props) {
         {/* Profile header */}
         <AnimatedSection className="flex flex-col sm:flex-row gap-8 items-start mb-12">
           {/* Avatar */}
-          <div className="shrink-0 h-28 w-28 rounded-full p-0.5 bg-gradient-to-br from-[#52B788] to-[#1A3A2E]">
+          {/* <div className="shrink-0 h-28 w-28 rounded-full p-0.5 bg-gradient-to-br from-[#52B788] to-[#1A3A2E]">
             <div className="h-full w-full rounded-full bg-[#1A3A2E] flex items-center justify-center text-white text-3xl font-serif">
               {initials(name)}
             </div>
-          </div>
+          </div> */}
+          <div className="shrink-0 h-16 w-16 rounded-full p-0.5 bg-gradient-to-br from-[#52B788] to-[#1A3A2E] self-start mt-0.5">
+        
+        <Image className="h-full w-full rounded-full bg-[#1A3A2E] flex items-center justify-center text-white text-lg font-serif" src={getAssetUrl(member)} alt="avatar" width={100} height={100}/>
+    </div>
 
           <div className="flex-1">
             {memberType && (

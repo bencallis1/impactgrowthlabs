@@ -20,6 +20,23 @@ const TYPE_LABELS: Record<MemberType, string> = {
   Board: "Board",
 };
 
+// function getAssetUrl(asset:object): string | null {
+
+//   const maybeAsset = asset as {
+//     fields?: { file?: { url?: unknown } };
+//   };
+
+//   const url = asset.fields.photo.fields.file.url;
+//   console.log('THE URL',url)
+//   console.log('the asset', url.startsWith("//") ? `https:${url}` : url)
+
+
+//   // if (typeof url !== "string" || url.length === 0) return null;
+
+//   return url.startsWith("//") ? `https:${url}` : url;
+// }
+
+
 export default async function TeamPage() {
   const members = await getTeamMembers();
 
@@ -60,9 +77,9 @@ export default async function TeamPage() {
               <h2 className="font-serif text-2xl text-[#1A3A2E] mb-6 pb-3 border-b border-[#52B788]/20">
                 {TYPE_LABELS[type]}
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {grouped[type].map((member) => (
-                  <TeamMemberCard key={member.sys.id} member={member} />
+                  <TeamMemberCard key={member.sys.id} member={member}  />
                 ))}
               </div>
             </AnimatedSection>

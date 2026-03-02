@@ -20,7 +20,8 @@ function getClient() {
   const space = process.env.CONTENTFUL_SPACE_ID;
   const accessToken = process.env.CONTENTFUL_ACCESS_TOKEN;
 
-  if (!space || !accessToken || space === "your_space_id") return null;
+  if (!space || !accessToken) return null;
+
 
   return createClient({ space, accessToken });
 }

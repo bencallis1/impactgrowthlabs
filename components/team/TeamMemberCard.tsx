@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, LinkedinIcon } from "lucide-react";
 import type { TeamMember } from "@/types/contentful";
+import Image from 'next/image'
 
 function initials(name: string) {
   return name
@@ -35,22 +36,40 @@ function richTextToPlainText(node: unknown): string {
   return "";
 }
 
+function getAssetUrl(asset:object): string | null {
+
+  const maybeAsset = asset as {
+    fields?: { file?: { url?: unknown } };
+  };
+
+  const url = asset.fields.photo.fields.file.url;
+  console.log('THE URL',url)
+  console.log('the asset', url.startsWith("//") ? `https:${url}` : url)
+
+
+  // if (typeof url !== "string" || url.length === 0) return null;
+
+  return url.startsWith("//") ? `https:${url}` : url;
+}
+
 export function TeamMemberCard({ member }: Props) {
+
+  console.log('the photo', member)
   const { name, slug, role, bio, linkedIn } = member.fields;
   const bioText = (
     typeof bio === "string" ? bio : richTextToPlainText(bio)
   )
     .replace(/\s+/g, " ")
     .trim();
-    console.log('THE MEMBER',member)
+
+    
 
   return (
     <div className="relative group flex gap-5 rounded-2xl border border-gray-100 bg-white p-6 hover:shadow-lg hover:-translate-y-0.5 hover:border-[#52B788]/30 transition-all duration-300">
       {/* Avatar */}
       <div className="shrink-0 h-16 w-16 rounded-full p-0.5 bg-gradient-to-br from-[#52B788] to-[#1A3A2E] self-start mt-0.5">
-        <div className="h-full w-full rounded-full bg-[#1A3A2E] flex items-center justify-center text-white text-lg font-serif">
-          {initials(name)}
-        </div>
+        
+          <Image className="h-full w-full rounded-full bg-[#1A3A2E] flex items-center justify-center text-white text-lg font-serif" src={getAssetUrl(member)} alt="avatar" width={100} height={100}/>
       </div>
 
       {/* Content */}
@@ -64,7 +83,7 @@ export function TeamMemberCard({ member }: Props) {
         </p>
         <div className="flex items-center gap-4">
           {/* LinkedIn sits above the stretched link (z-10) */}
-          {linkedIn && (
+          {/* {linkedIn && (
             <a
               href={linkedIn}
               target="_blank"
@@ -74,7 +93,7 @@ export function TeamMemberCard({ member }: Props) {
               <LinkedinIcon size={12} />
               LinkedIn
             </a>
-          )}
+          )} */}
           <span className="inline-flex items-center gap-1 text-xs font-medium text-[#52B788] group-hover:gap-1.5 transition-all pointer-events-none">
             Full profile <ArrowRight size={12} />
           </span>
