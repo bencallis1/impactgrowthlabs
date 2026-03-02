@@ -264,7 +264,7 @@ export default function WhatIsImpactPage() {
             <AnimatedSection delay={0.15}>
               <div className="relative rounded-3xl overflow-hidden aspect-[4/3] shadow-2xl">
                 <Image
-                  src="https://imagedelivery.net/lcKdEvt7ci2YjdeNVK02Iw/f229994d-d0d8-4f43-de8d-9a6c4d63d300/Originals"
+                  src="https://imagedelivery.net/lcKdEvt7ci2YjdeNVK02Iw/0c736f2c-ef12-45e5-2566-bf79ae470700/Originals"
                   alt="Data analytics dashboard showing impact metrics and performance charts"
                   fill
                   className="object-cover"
@@ -278,7 +278,7 @@ export default function WhatIsImpactPage() {
       </section>
 
       {/* ── Section 4: Impact in practice — dark metrics band ── */}
-      <section className="py-24 bg-[#1A3A2E]">
+      {/* <section className="py-24 bg-[#1A3A2E]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="text-center mb-16">
             <div className="flex items-center justify-center gap-3 mb-4">
@@ -322,10 +322,10 @@ export default function WhatIsImpactPage() {
             </p>
           </AnimatedSection>
         </div>
-      </section>
+      </section> */}
 
       {/* ── CTA ── */}
-      <section className="py-24 bg-white">
+      {/* <section className="py-24 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="max-w-2xl">
             <p className="text-[#52B788] text-sm font-medium tracking-widest uppercase mb-4">
@@ -355,7 +355,7 @@ export default function WhatIsImpactPage() {
             </div>
           </AnimatedSection>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }
