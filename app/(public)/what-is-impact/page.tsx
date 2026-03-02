@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
-import { Leaf, Heart, GraduationCap, Recycle, BarChart3, Target, CheckCircle } from "lucide-react";
+import {
+  CheckCircle,
+} from "lucide-react";
 
 export const metadata: Metadata = {
   title: "What is Impact?",
@@ -9,47 +11,24 @@ export const metadata: Metadata = {
     "Impact investing means generating measurable positive outcomes for people and planet — alongside financial returns. Explore our philosophy, focus areas, and measurement framework.",
 };
 
-// ── Data ─────────────────────────────────────────────────────────────────────
 
-const focusAreas = [
-  {
-    icon: Leaf,
-    label: "Climate & Environment",
-    description: "Decarbonisation, circular systems, and nature-based solutions.",
-  },
-  {
-    icon: Heart,
-    label: "Health & Wellbeing",
-    description: "Accessible care, digital health, and underserved communities.",
-  },
-  {
-    icon: GraduationCap,
-    label: "Education & Mobility",
-    description: "First-generation learners and workforce pathways.",
-  },
-  {
-    icon: Recycle,
-    label: "Circular Economy",
-    description: "Waste elimination, material recovery, and regenerative supply chains.",
-  },
-];
 
 const measurementPillars = [
   {
-    title: "Theory of change",
-    body: "Every investment begins with a clearly articulated pathway from activity to outcome to long-term systemic shift.",
+    title: "Theory of Change Development",
+    body: "a clearly articulated pathway from business activity to measurable outcome to long-term systemic shift",
   },
   {
-    title: "SDG alignment",
-    body: "We map investments to the United Nations Sustainable Development Goals, giving our portfolio a shared global language.",
+    title: "CERT Tech Impact Measurement",
+    body: "eal-time impact verification tools that go far beyond quarterly self-reporting",
   },
   {
-    title: "IRIS+ metrics",
-    body: "We draw from the GIIN's IRIS+ catalogue to select the indicators most meaningful for each sector and stage.",
+    title: "Bronze and Silver Impact Certification",
+    body: "independent, third-party verification of impact claims at each program stage",
   },
   {
-    title: "Annual impact audits",
-    body: "Portfolio companies submit standardised impact data annually, independently reviewed against their stated theory of change.",
+    title: "Ongoing Impact Mentorship",
+    body: "guidance from practitioners with over 30 years of hands-on impact project experience across four continents",
   },
 ];
 
@@ -67,7 +46,6 @@ const practiceStats = [
 export default function WhatIsImpactPage() {
   return (
     <div className="min-h-screen bg-white">
-
       {/* ── Hero ── */}
       <section className="relative h-[92vh] min-h-[600px] flex items-center">
         {/* Background image */}
@@ -89,12 +67,14 @@ export default function WhatIsImpactPage() {
               Our Philosophy
             </p>
             <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl text-white max-w-3xl leading-[1.1] mb-6">
-              What is<br />impact?
+              What is
+              <br />
+              impact?
             </h1>
             <p className="text-white/70 text-xl max-w-xl leading-relaxed">
-              Impact is not a compromise. It is the belief that capital deployed
-              with intention — toward real problems — generates better outcomes
-              for both investors and the world.
+              Real impact isn&apos;t a compromise between doing good and doing
+              well. It&apos;s the natural result of building businesses that
+              solve the world&apos;s most pressing problems.
             </p>
           </AnimatedSection>
         </div>
@@ -110,8 +90,8 @@ export default function WhatIsImpactPage() {
             <p className="text-2xl sm:text-3xl font-serif text-[#1A3A2E] leading-relaxed">
               &ldquo;Impact investing&rdquo; describes the practice of deploying
               capital with the explicit intention to generate positive,
-              measurable social or environmental outcomes — alongside
-              financial returns.
+              measurable social or environmental outcomes — alongside financial
+              returns.
             </p>
             <p className="mt-6 text-lg text-[#0F1A14]/60">
               At Impact Growth Labs, we believe those two goals are not in
@@ -125,32 +105,35 @@ export default function WhatIsImpactPage() {
       <section className="py-24 bg-[#F7FAF8]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-
             {/* Text */}
             <AnimatedSection>
               <p className="text-[#52B788] text-sm font-medium tracking-widest uppercase mb-4">
-                Redefining Return
+                More Than a Metric.
               </p>
               <h2 className="font-serif text-4xl sm:text-5xl text-[#1A3A2E] mb-6 leading-tight">
-                Capital with<br />a purpose
+                A Way of Building.
+                <br />
+                with purpose
               </h2>
               <div className="space-y-4 text-[#0F1A14]/70 text-lg leading-relaxed">
                 <p>
-                  Traditional investing asks one question: what is the financial
-                  return? Impact investing adds a second: what is the return for
-                  society and the planet?
+                  Impact investing has become a widely used phrase — but for us,
+                  it describes something more fundamental than an investment
+                  category or a reporting framework. At BGSImpact, impact means
+                  building ventures that create measurable, positive change in
+                  the world as a direct result of how they operate, not as an
+                  afterthought. We believe that entrepreneurs who set out to
+                  solve humanity's greatest challenges — in health, education,
+                  energy, the environment, and beyond — are building the most
+                  important companies of this generation.
                 </p>
                 <p>
-                  The evidence is growing that asking both questions produces
-                  better answers to each. Companies solving real problems tend
-                  to build more durable moats, attract mission-aligned talent,
-                  and operate in markets with regulatory and societal tailwinds.
-                </p>
-                <p>
-                  We invest at the pre-seed and seed stage, where the founding
-                  decisions that define a company&apos;s impact trajectory are
-                  still being made — and where patient, mission-aligned capital
-                  has the highest leverage.
+                  And with the right support, they can also build the most
+                  profitable ones. We don't ask founders to choose between
+                  financial ambition and meaningful purpose. Through our
+                  Risk-Return-Impact model, we help them demonstrate that these
+                  goals are not in tension — they are the same goal, pursued
+                  together.
                 </p>
               </div>
             </AnimatedSection>
@@ -177,7 +160,6 @@ export default function WhatIsImpactPage() {
       <section className="py-24 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-
             {/* Image — appears first on mobile, left on desktop */}
             <AnimatedSection delay={0.1} className="order-2 lg:order-1">
               <div className="relative rounded-3xl overflow-hidden aspect-[4/3] shadow-2xl">
@@ -195,32 +177,32 @@ export default function WhatIsImpactPage() {
             {/* Text */}
             <AnimatedSection className="order-1 lg:order-2">
               <p className="text-[#52B788] text-sm font-medium tracking-widest uppercase mb-4">
-                Where We Focus
+                The Artificial Separation
               </p>
               <h2 className="font-serif text-4xl sm:text-5xl text-[#1A3A2E] mb-6 leading-tight">
-                Our impact<br />thesis
+                Has to End.
+                {/* <br />
+                thesis */}
               </h2>
               <p className="text-[#0F1A14]/70 text-lg leading-relaxed mb-8">
-                We concentrate where the need is greatest and where technology-
-                enabled business models can achieve scale. Four domains guide
-                every investment decision we make.
+                For decades, traditional investing has operated from a false
+                premise: that financial returns and positive impact require
+                trade-offs. That purpose costs something. That doing good means
+                doing less well. We've seen the evidence — in our own portfolio
+                and across the broader landscape — that this isn't true.
+                Businesses that solve real problems tend to attract
+                mission-aligned talent, build more durable competitive
+                advantages, and operate in sectors with powerful societal
+                tailwinds. The most important markets of the next century are
+                defined by the world's most urgent challenges: clean energy,
+                food security, accessible healthcare, economic inclusion. The
+                entrepreneurs who address these challenges early, with the right
+                capital and operational support behind them, don't just make the
+                world better — they build exceptional businesses. BGSImpact
+                exists to prove this, one company at a time.
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {focusAreas.map(({ icon: Icon, label, description }) => (
-                  <div
-                    key={label}
-                    className="flex gap-3 p-4 rounded-xl bg-[#F7FAF8] border border-gray-100"
-                  >
-                    <div className="shrink-0 mt-0.5 h-8 w-8 rounded-lg bg-[#1A3A2E] flex items-center justify-center">
-                      <Icon size={15} className="text-[#52B788]" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-[#1A3A2E] mb-0.5">{label}</p>
-                      <p className="text-xs text-[#0F1A14]/60 leading-relaxed">{description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              
+
             </AnimatedSection>
           </div>
         </div>
@@ -230,20 +212,24 @@ export default function WhatIsImpactPage() {
       <section className="py-24 bg-[#F7FAF8]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-
             {/* Text */}
             <AnimatedSection>
               <p className="text-[#52B788] text-sm font-medium tracking-widest uppercase mb-4">
-                Measurement as Foundation
+                An Impact Claim Without Evidence Is Just Marketing.
               </p>
               <h2 className="font-serif text-4xl sm:text-5xl text-[#1A3A2E] mb-6 leading-tight">
-                How we measure<br />what matters
+                How we measure
+                <br />
+                what matters
               </h2>
               <p className="text-[#0F1A14]/70 text-lg leading-relaxed mb-8">
-                An impact claim without evidence is marketing. We hold ourselves
-                and our portfolio to a rigorous measurement standard — one built
-                on sector-standard frameworks and independent review.
+                We hold ourselves and the ventures we support to a rigorous
+                standard of impact measurement — not because investors demand it
+                (though they do), but because measurement is how we learn,
+                improve, and demonstrate truth.
               </p>
+
+              <p className="text-[#0F1A14]/70 text-lg leading-relaxed mb-8">Every venture in our programs works through our Risk-Return-Impact curriculum, which provides:</p>
               <div className="space-y-4">
                 {measurementPillars.map((pillar) => (
                   <div key={pillar.title} className="flex gap-4">
@@ -252,12 +238,18 @@ export default function WhatIsImpactPage() {
                       className="shrink-0 mt-0.5 text-[#52B788]"
                     />
                     <div>
-                      <p className="font-semibold text-[#1A3A2E] mb-0.5">{pillar.title}</p>
-                      <p className="text-sm text-[#0F1A14]/60 leading-relaxed">{pillar.body}</p>
+                      <p className="font-semibold text-[#1A3A2E] mb-0.5">
+                        {pillar.title}
+                      </p>
+                      <p className="text-sm text-[#0F1A14]/60 leading-relaxed">
+                        {pillar.body}
+                      </p>
                     </div>
                   </div>
                 ))}
               </div>
+              <p className="text-[#0F1A14]/70 text-lg leading-relaxed mt-8 mb-8">We believe the next generation of impact measurement will be defined by real-time transparency and independent verification — not by sanitized reports and vague sustainability claims. We're building toward that future, and we invite the ventures we work with to lead the way.</p>
+
             </AnimatedSection>
 
             {/* Image */}

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, LinkedinIcon } from "lucide-react";
+import Image from "next/image";
 import type { TeamMember } from "@/types/contentful";
-import Image from 'next/image'
 
 function initials(name: string) {
   return name
@@ -36,25 +36,13 @@ function richTextToPlainText(node: unknown): string {
   return "";
 }
 
-function getAssetUrl(asset:object): string | null {
-
-  const maybeAsset = asset as {
-    fields?: { file?: { url?: unknown } };
-  };
-
-  const url = asset.fields.photo.fields.file.url;
-  console.log('THE URL',url)
-  console.log('the asset', url.startsWith("//") ? `https:${url}` : url)
-
-
-  // if (typeof url !== "string" || url.length === 0) return null;
-
+function getPhotoUrl(member: TeamMember): string | null {
+  const url = member.fields.photo?.fields.file?.url;
+  if (typeof url !== "string" || url.length === 0) return null;
   return url.startsWith("//") ? `https:${url}` : url;
 }
 
 export function TeamMemberCard({ member }: Props) {
-
-  console.log('the photo', member)
   const { name, slug, role, bio, linkedIn } = member.fields;
   const bioText = (
     typeof bio === "string" ? bio : richTextToPlainText(bio)
@@ -68,8 +56,23 @@ export function TeamMemberCard({ member }: Props) {
     <div className="relative group flex gap-5 rounded-2xl border border-gray-100 bg-white p-6 hover:shadow-lg hover:-translate-y-0.5 hover:border-[#52B788]/30 transition-all duration-300">
       {/* Avatar */}
       <div className="shrink-0 h-16 w-16 rounded-full p-0.5 bg-gradient-to-br from-[#52B788] to-[#1A3A2E] self-start mt-0.5">
-        
-          <Image className="h-full w-full rounded-full bg-[#1A3A2E] flex items-center justify-center text-white text-lg font-serif" src={getAssetUrl(member)} alt="avatar" width={100} height={100}/>
+        <div className="relative h-full w-full rounded-full overflow-hidden bg-[#1A3A2E] flex items-center justify-center text-white text-lg font-serif">
+          {(() => {
+            const url = getPhotoUrl(member);
+            if (!url) {
+              return <span aria-hidden="true">{initials(name)}</span>;
+            }
+            return (
+              <Image
+                src={url}
+                alt={`Profile photo of ${name}`}
+                fill
+                sizes="64px"
+                className="object-cover"
+              />
+            );
+          })()}
+        </div>
       </div>
 
       {/* Content */}

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image"
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, BookOpen, FileText, LinkedinIcon, Twitter } from "lucide-react";
@@ -12,6 +12,7 @@ import {
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { RichTextRenderer } from "@/components/blog/RichTextRenderer";
 import type { Document } from "@contentful/rich-text-types";
+import type { TeamMember } from "@/types/contentful";
 
 export const revalidate = 3600;
 
@@ -55,19 +56,9 @@ function formatDate(dateStr: string) {
   });
 }
 
-function getAssetUrl(asset:object): string | null {
-
-  const maybeAsset = asset as {
-    fields?: { file?: { url?: unknown } };
-  };
-
-  const url = asset.fields.photo.fields.file.url;
-  console.log('THE URL',url)
-  console.log('the asset', url.startsWith("//") ? `https:${url}` : url)
-
-
-  // if (typeof url !== "string" || url.length === 0) return null;
-
+function getAssetUrl(member: TeamMember): string | null {
+  const url = member.fields.photo?.fields.file?.url;
+  if (typeof url !== "string" || url.length === 0) return null;
   return url.startsWith("//") ? `https:${url}` : url;
 }
 
@@ -114,9 +105,24 @@ export default async function TeamMemberPage({ params }: Props) {
             </div>
           </div> */}
           <div className="shrink-0 h-16 w-16 rounded-full p-0.5 bg-gradient-to-br from-[#52B788] to-[#1A3A2E] self-start mt-0.5">
-        
-        <Image className="h-full w-full rounded-full bg-[#1A3A2E] flex items-center justify-center text-white text-lg font-serif" src={getAssetUrl(member)} alt="avatar" width={100} height={100}/>
-    </div>
+            <div className="relative h-full w-full rounded-full overflow-hidden bg-[#1A3A2E] flex items-center justify-center text-white text-lg font-serif">
+              {(() => {
+                const url = getAssetUrl(member);
+                if (!url) {
+                  return <span aria-hidden="true">{initials(name)}</span>;
+                }
+                return (
+                  <Image
+                    src={url}
+                    alt={`Profile photo of ${name}`}
+                    fill
+                    sizes="64px"
+                    className="object-cover"
+                  />
+                );
+              })()}
+            </div>
+          </div>
 
           <div className="flex-1">
             {memberType && (

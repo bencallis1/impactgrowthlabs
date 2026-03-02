@@ -67,7 +67,7 @@ export function Team({ members }: { members: TeamMember[] }) {
 
             return (
               <StaggerItem key={member.sys.id}>
-                <TeamMemberCard key={member.sys.id} member={member} photo={member}/>
+                <TeamMemberCard key={member.sys.id} member={member} />
                 
                   
               </StaggerItem>
