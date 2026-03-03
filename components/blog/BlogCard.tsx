@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { Calendar, Tag } from "lucide-react";
 import type { BlogPost } from "@/types/contentful";
-
+import Image from "next/image";
+import { getBlogCoverImageUrl } from "@/helpers/contentFunctions";
 function formatDate(d: string) {
   return new Date(d).toLocaleDateString("en-US", {
     month: "long",
@@ -10,6 +11,7 @@ function formatDate(d: string) {
   });
 }
 
+
 export function BlogCard({ post }: { post: BlogPost }) {
   return (
     <Link
@@ -17,9 +19,22 @@ export function BlogCard({ post }: { post: BlogPost }) {
       className="group block rounded-2xl bg-white border border-gray-100 overflow-hidden hover:shadow-lg hover:border-[#52B788]/30 transition-all duration-300"
     >
       {/* Cover */}
-      <div className="h-52 bg-gradient-to-br from-[#1A3A2E] to-[#2D6A4F] relative overflow-hidden">
-        <div className="absolute inset-0 flex items-center justify-center opacity-10">
-          <span className="font-serif text-8xl text-white">IGL</span>
+      <div className="h-52  relative overflow-hidden">
+        <div className="absolute inset-0 flex items-center justify-center ">
+          {/* <span className="font-serif text-8xl text-white">IGL</span> */}
+          {(() => {
+            const coverUrl = getBlogCoverImageUrl(post);
+            if (!coverUrl) return <span className="font-serif text-8xl text-white">IGL</span>;
+            return (
+              <Image
+              fill={true}
+                src={coverUrl}
+                alt={post.fields.title}
+                // width={100}
+                // height={100}
+              />
+            );
+          })()}
         </div>
         {post.fields.tags && post.fields.tags.length > 0 && (
           <div className="absolute top-4 left-4 flex gap-2">

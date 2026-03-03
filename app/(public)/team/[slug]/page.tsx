@@ -71,7 +71,6 @@ export default async function TeamMemberPage({ params }: Props) {
   const { name, role, bio, memberType, linkedIn, twitter, photo } = member.fields;
   const isRichTextBio = typeof bio === "object" && bio !== null;
 
-  console.log('the photo', photo?.fields.file.url)
 
   // Fetch related writing in parallel
   const [blogPosts, caseStudies] = await Promise.all([
