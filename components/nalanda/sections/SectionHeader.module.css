@@ -1,0 +1,50 @@
+.header {
+  margin-bottom: var(--space-16, 4rem);
+}
+
+.center {
+  text-align: center;
+}
+
+.left {
+  text-align: left;
+}
+
+.headline {
+  font-family: var(--serif);
+  font-size: var(--text-h2);
+  font-weight: 900;
+  font-style: normal;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+
+.headline.light {
+  color: var(--ink);
+}
+
+.headline.dark {
+  color: var(--cream);
+}
+
+.subhead {
+  font-family: var(--sans);
+  font-size: var(--text-body-lg);
+  font-weight: 300;
+  line-height: 1.8;
+  max-width: 640px;
+}
+
+.subhead.light {
+  color: var(--text-body);
+}
+
+.subhead.dark {
+  color: var(--text-body-dark);
+}
+
+.center .subhead {
+  margin-left: auto;
+  margin-right: auto;
+}
+

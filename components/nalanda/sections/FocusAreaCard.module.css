@@ -1,0 +1,76 @@
+.card {
+  padding: var(--card-pad);
+  border: 1px solid var(--border);
+  transition: var(--transition);
+  background: var(--parchment);
+}
+
+.card:hover {
+  border-color: var(--ink);
+}
+
+.accent {
+  width: 40px;
+  height: 1px;
+  background: var(--ink);
+  margin-bottom: 1.8rem;
+  opacity: 0.6;
+}
+
+.title {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-weight: 700;
+  font-style: normal;
+  color: var(--ink);
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+.body {
+  font-family: var(--sans);
+  font-size: var(--text-body);
+  line-height: 1.85;
+  color: var(--text-body);
+  margin-bottom: 1.5rem;
+}
+
+.questions {
+  border-top: 1px solid var(--border);
+  padding-top: 1.2rem;
+}
+
+.questionsLabel {
+  font-family: var(--sans);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 0.8rem;
+}
+
+.questionsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.question {
+  font-family: var(--serif);
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--ink);
+  opacity: 0.55;
+  padding: 0.4rem 0 0.4rem 1.2rem;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.question::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--amber);
+  opacity: 0.6;
+}
+

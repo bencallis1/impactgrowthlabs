@@ -1,0 +1,25 @@
+.tag {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.8rem;
+  border-radius: 0;
+}
+
+.gold {
+  border: 1px solid rgba(20, 18, 14, 0.22);
+  color: var(--ink);
+}
+
+.sage {
+  border: 1px solid rgba(143, 175, 138, 0.4);
+  color: var(--ink);
+}
+
+.terracotta {
+  border: 1px solid rgba(168, 92, 64, 0.4);
+  color: var(--ink);
+}
+

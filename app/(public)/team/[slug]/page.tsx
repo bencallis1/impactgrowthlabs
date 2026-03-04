@@ -81,14 +81,14 @@ export default async function TeamMemberPage({ params }: Props) {
   const hasWriting = blogPosts.length > 0 || caseStudies.length > 0;
 
   return (
-    <div className="min-h-screen bg-[#F7FAF8] pt-28 pb-24">
+    <div className="min-h-screen bg-[color:var(--color-cream)] pt-28 pb-24">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
 
         {/* Back link */}
         <AnimatedSection className="mb-10">
           <Link
             href="/team"
-            className="inline-flex items-center gap-2 text-sm font-medium text-[#2D6A4F] hover:text-[#1A3A2E] transition-colors"
+            className="inline-flex items-center gap-2 text-sm font-medium text-[color:var(--color-gold)] hover:text-[color:var(--color-indigo)] transition-colors"
           >
             <ArrowLeft size={14} />
             All team members
@@ -103,8 +103,8 @@ export default async function TeamMemberPage({ params }: Props) {
               {initials(name)}
             </div>
           </div> */}
-          <div className="shrink-0 h-16 w-16 rounded-full p-0.5 bg-gradient-to-br from-[#52B788] to-[#1A3A2E] self-start mt-0.5">
-            <div className="relative h-full w-full rounded-full overflow-hidden bg-[#1A3A2E] flex items-center justify-center text-white text-lg font-serif">
+          <div className="shrink-0 h-16 w-16 rounded-full p-0.5 bg-gradient-to-br from-[color:var(--color-gold)] to-[color:var(--color-indigo)] self-start mt-0.5">
+            <div className="relative h-full w-full rounded-full overflow-hidden bg-[color:var(--color-indigo)] flex items-center justify-center text-[color:var(--color-text-on-dark)] text-lg font-serif">
               {(() => {
                 const url = getAssetUrl(member);
                 if (!url) {
@@ -125,14 +125,16 @@ export default async function TeamMemberPage({ params }: Props) {
 
           <div className="flex-1">
             {memberType && (
-              <span className="inline-block text-xs font-medium tracking-widest uppercase text-[#52B788] mb-2">
+              <span className="inline-block text-xs font-medium tracking-widest uppercase text-[color:var(--color-gold)] mb-2">
                 {memberType}
               </span>
             )}
-            <h1 className="font-serif text-4xl sm:text-5xl text-[#1A3A2E] mb-2">
+            <h1 className="font-serif text-4xl sm:text-5xl text-[color:var(--color-indigo)] mb-2">
               {name}
             </h1>
-            <p className="text-lg text-[#52B788] font-medium mb-4">{role}</p>
+            <p className="text-lg text-[color:var(--color-text-secondary)] font-medium mb-4">
+              {role}
+            </p>
 
             {/* Social links */}
             <div className="flex items-center gap-4">
@@ -141,7 +143,7 @@ export default async function TeamMemberPage({ params }: Props) {
                   href={linkedIn}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm font-medium text-[#2D6A4F] hover:text-[#1A3A2E] transition-colors"
+                  className="inline-flex items-center gap-1.5 text-sm font-medium text-[color:var(--color-indigo)] hover:text-[color:var(--color-gold)] transition-colors"
                 >
                   <LinkedinIcon size={15} />
                   LinkedIn
@@ -152,7 +154,7 @@ export default async function TeamMemberPage({ params }: Props) {
                   href={`https://twitter.com/${twitter.replace("@", "")}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm font-medium text-[#2D6A4F] hover:text-[#1A3A2E] transition-colors"
+                  className="inline-flex items-center gap-1.5 text-sm font-medium text-[color:var(--color-indigo)] hover:text-[color:var(--color-gold)] transition-colors"
                 >
                   <Twitter size={15} />
                   {twitter}
@@ -168,7 +170,7 @@ export default async function TeamMemberPage({ params }: Props) {
             <RichTextRenderer document={bio as Document} />
           ) : (
             <div className="prose prose-lg max-w-none">
-              <p className="text-xl text-[#0F1A14]/70 leading-relaxed">
+              <p className="text-xl text-[color:var(--color-text-secondary)] leading-relaxed">
                 {bio}
               </p>
             </div>
@@ -178,8 +180,8 @@ export default async function TeamMemberPage({ params }: Props) {
         {/* Related writing */}
         {hasWriting && (
           <AnimatedSection delay={0.2}>
-            <div className="border-t border-[#52B788]/20 pt-12">
-              <h2 className="font-serif text-3xl text-[#1A3A2E] mb-8">
+            <div className="border-t border-[color:var(--color-border-gold)] pt-12">
+              <h2 className="font-serif text-3xl text-[color:var(--color-indigo)] mb-8">
                 Writing &amp; research
               </h2>
 
@@ -188,8 +190,8 @@ export default async function TeamMemberPage({ params }: Props) {
                 {blogPosts.length > 0 && (
                   <div>
                     <div className="flex items-center gap-2 mb-4">
-                      <BookOpen size={16} className="text-[#52B788]" />
-                      <h3 className="text-sm font-medium tracking-widest uppercase text-[#52B788]">
+                      <BookOpen size={16} className="text-[color:var(--color-gold)]" />
+                      <h3 className="text-sm font-medium tracking-widest uppercase text-[color:var(--color-gold)]">
                         Blog Posts
                       </h3>
                     </div>
@@ -198,16 +200,16 @@ export default async function TeamMemberPage({ params }: Props) {
                         <Link
                           key={post.sys.id}
                           href={`/blog/${post.fields.slug}`}
-                          className="group flex items-start gap-4 rounded-xl border border-gray-100 bg-white p-5 hover:shadow-md hover:border-[#52B788]/30 transition-all duration-300"
+                          className="group flex items-start gap-4 rounded-xl border border-[color:var(--color-border-light)] bg-[#ffffff] p-5 hover:shadow-md hover:border-[color:var(--color-border-gold)] transition-all duration-300"
                         >
                           <div className="flex-1 min-w-0">
-                            <h4 className="text-base font-semibold text-[#1A3A2E] group-hover:text-[#2D6A4F] transition-colors mb-1">
+                            <h4 className="text-base font-semibold text-[color:var(--color-indigo)] group-hover:text-[color:var(--color-gold)] transition-colors mb-1">
                               {post.fields.title}
                             </h4>
-                            <p className="text-sm text-[#0F1A14]/60 line-clamp-2 mb-2">
+                            <p className="text-sm text-[color:var(--color-text-secondary)] line-clamp-2 mb-2">
                               {post.fields.excerpt}
                             </p>
-                            <div className="flex items-center gap-3 text-xs text-[#0F1A14]/40">
+                            <div className="flex items-center gap-3 text-xs text-[color:var(--color-text-tertiary)]">
                               <span>{formatDate(post.fields.publishedDate)}</span>
                               {post.fields.readTimeMinutes && (
                                 <>
@@ -227,8 +229,8 @@ export default async function TeamMemberPage({ params }: Props) {
                 {caseStudies.length > 0 && (
                   <div>
                     <div className="flex items-center gap-2 mb-4">
-                      <FileText size={16} className="text-[#52B788]" />
-                      <h3 className="text-sm font-medium tracking-widest uppercase text-[#52B788]">
+                      <FileText size={16} className="text-[color:var(--color-gold)]" />
+                      <h3 className="text-sm font-medium tracking-widest uppercase text-[color:var(--color-gold)]">
                         Case Studies
                       </h3>
                     </div>
@@ -237,21 +239,23 @@ export default async function TeamMemberPage({ params }: Props) {
                         <Link
                           key={study.sys.id}
                           href={`/case-studies/${study.fields.slug}`}
-                          className="group flex items-start gap-4 rounded-xl border border-gray-100 bg-white p-5 hover:shadow-md hover:border-[#52B788]/30 transition-all duration-300"
+                          className="group flex items-start gap-4 rounded-xl border border-[color:var(--color-border-light)] bg-[#ffffff] p-5 hover:shadow-md hover:border-[color:var(--color-border-gold)] transition-all duration-300"
                         >
                           <div className="flex-1 min-w-0">
-                            <h4 className="text-base font-semibold text-[#1A3A2E] group-hover:text-[#2D6A4F] transition-colors mb-1">
+                            <h4 className="text-base font-semibold text-[color:var(--color-indigo)] group-hover:text-[color:var(--color-gold)] transition-colors mb-1">
                               {study.fields.title}
                             </h4>
-                            <p className="text-sm text-[#0F1A14]/60 line-clamp-2 mb-2">
+                            <p className="text-sm text-[color:var(--color-text-secondary)] line-clamp-2 mb-2">
                               {study.fields.excerpt}
                             </p>
-                            <div className="flex items-center gap-3 text-xs text-[#0F1A14]/40">
+                            <div className="flex items-center gap-3 text-xs text-[color:var(--color-text-tertiary)]">
                               <span>{formatDate(study.fields.publishedDate)}</span>
                               {study.fields.impactSummary && (
                                 <>
                                   <span>·</span>
-                                  <span className="text-[#52B788]">{study.fields.impactSummary}</span>
+                                  <span className="text-[color:var(--color-gold)]">
+                                    {study.fields.impactSummary}
+                                  </span>
                                 </>
                               )}
                             </div>

@@ -18,12 +18,12 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useMotionValueEvent(scrollY, "change", (y) => {
-    setScrolled(y > 20);
+    setScrolled(y > 40);
   });
 
   return (
     <motion.header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-400 ${
         scrolled
           ? "bg-white/95 backdrop-blur-md shadow-sm"
           : "bg-transparent"
@@ -37,9 +37,11 @@ export function Navbar() {
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-2 text-[#1A3A2E] font-serif text-xl font-normal tracking-tight"
+            className={`flex items-center gap-2 font-serif text-xl font-normal tracking-tight transition-colors duration-300 ${
+              scrolled ? "text-[#1A3A2E]" : "text-white"
+            }`}
           >
-            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#1A3A2E] text-white text-sm font-bold">
+            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#52B788] text-[#0F1A14] text-sm font-bold">
               IG
             </span>
             <span className="hidden sm:block">Impact Growth Labs</span>
@@ -51,14 +53,22 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium text-[#0F1A14]/70 hover:text-[#1A3A2E] transition-colors"
+                className={`text-sm font-medium transition-colors duration-300 ${
+                  scrolled
+                    ? "text-[#0F1A14]/70 hover:text-[#1A3A2E]"
+                    : "text-white/75 hover:text-white"
+                }`}
               >
                 {link.label}
               </Link>
             ))}
             <Link
               href="/portal"
-              className="rounded-full bg-[#1A3A2E] px-4 py-2 text-sm font-medium text-white hover:bg-[#2D6A4F] transition-colors"
+              className={`rounded-full px-4 py-2 text-sm font-medium transition-all duration-300 ${
+                scrolled
+                  ? "bg-[#1A3A2E] text-white hover:bg-[#2D6A4F]"
+                  : "border border-white/30 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20"
+              }`}
             >
               Investor Portal
             </Link>
@@ -66,7 +76,9 @@ export function Navbar() {
 
           {/* Mobile toggle */}
           <button
-            className="md:hidden p-2 text-[#1A3A2E]"
+            className={`md:hidden p-2 transition-colors duration-300 ${
+              scrolled ? "text-[#1A3A2E]" : "text-white"
+            }`}
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
           >
@@ -80,26 +92,26 @@ export function Navbar() {
         <motion.div
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
-          className="md:hidden bg-white border-t border-gray-100 px-4 py-4"
+          className="md:hidden bg-[#0F1A14]/95 backdrop-blur-md border-t border-white/10 px-4 py-4"
         >
           <div className="flex flex-col gap-4">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium text-[#0F1A14]/80 hover:text-[#1A3A2E]"
+                className="text-sm font-medium text-white/80 hover:text-white"
                 onClick={() => setMobileOpen(false)}
               >
                 {link.label}
               </Link>
             ))}
-            <Link
+            {/* <Link
               href="/portal"
-              className="w-full rounded-full bg-[#1A3A2E] px-4 py-2 text-center text-sm font-medium text-white"
+              className="w-full rounded-full border border-white/20 bg-white/10 px-4 py-2 text-center text-sm font-medium text-white hover:bg-white/20"
               onClick={() => setMobileOpen(false)}
             >
               Investor Portal
-            </Link>
+            </Link> */}
           </div>
         </motion.div>
       )}

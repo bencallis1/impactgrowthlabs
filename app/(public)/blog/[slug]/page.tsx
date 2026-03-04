@@ -44,12 +44,12 @@ export default async function BlogPostPage({
   if (!post) notFound();
 
   return (
-    <div className="min-h-screen bg-white pt-28 pb-24">
+    <div className="min-h-screen bg-[color:var(--color-cream)] pt-28 pb-24">
       <div className="mx-auto max-w-3xl px-4 sm:px-6">
         {/* Back */}
         <Link
           href="/blog"
-          className="inline-flex items-center gap-2 text-sm text-[#2D6A4F] hover:text-[#1A3A2E] mb-10 transition-colors"
+          className="inline-flex items-center gap-2 text-sm text-[color:var(--color-gold)] hover:text-[color:var(--color-indigo)] mb-10 transition-colors"
         >
           <ArrowLeft size={16} /> Back to Blog
         </Link>
@@ -60,7 +60,7 @@ export default async function BlogPostPage({
             {post.fields.tags.map((tag) => (
               <span
                 key={tag}
-                className="rounded-full bg-[#F7FAF8] border border-[#52B788]/30 px-3 py-1 text-xs text-[#2D6A4F] font-medium"
+                className="rounded-full bg-[color:var(--color-cream)] border border-[color:var(--color-border-gold)] px-3 py-1 text-xs text-[color:var(--color-indigo)] font-medium"
               >
                 {tag}
               </span>
@@ -69,12 +69,12 @@ export default async function BlogPostPage({
         )}
 
         {/* Title */}
-        <h1 className="font-serif text-4xl sm:text-5xl text-[#1A3A2E] leading-tight mb-6">
+        <h1 className="font-serif text-4xl sm:text-5xl text-[color:var(--color-indigo)] leading-tight mb-6">
           {post.fields.title}
         </h1>
 
         {/* Meta */}
-        <div className="flex items-center gap-4 text-sm text-[#0F1A14]/50 mb-10 pb-10 border-b border-gray-100">
+        <div className="flex items-center gap-4 text-sm text-[color:var(--color-text-tertiary)] mb-10 pb-10 border-b border-[color:var(--color-border-light)]">
           <div className="flex items-center gap-1.5">
             <Calendar size={14} />
             {formatDate(post.fields.publishedDate)}
@@ -84,7 +84,7 @@ export default async function BlogPostPage({
         </div>
 
         {/* Excerpt */}
-        <p className="text-xl text-[#0F1A14]/60 leading-relaxed mb-10 font-medium">
+        <p className="text-xl text-[color:var(--color-text-secondary)] leading-relaxed mb-10 font-medium">
           {post.fields.excerpt}
         </p>
 
@@ -92,7 +92,7 @@ export default async function BlogPostPage({
         {post.fields.body?.content?.length > 0 ? (
           <RichTextRenderer document={post.fields.body} />
         ) : (
-          <p className="text-[#0F1A14]/50 italic">
+          <p className="text-[color:var(--color-text-tertiary)] italic">
             Full article coming soon. Check back later.
           </p>
         )}

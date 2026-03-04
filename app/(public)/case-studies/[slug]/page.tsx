@@ -43,46 +43,46 @@ export default async function CaseStudyPage({
   if (!study) notFound();
 
   return (
-    <div className="min-h-screen bg-white pt-28 pb-24">
+    <div className="min-h-screen bg-[color:var(--color-cream)] pt-28 pb-24">
       <div className="mx-auto max-w-3xl px-4 sm:px-6">
         {/* Back */}
         <Link
           href="/case-studies"
-          className="inline-flex items-center gap-2 text-sm text-[#2D6A4F] hover:text-[#1A3A2E] mb-10 transition-colors"
+          className="inline-flex items-center gap-2 text-sm text-[color:var(--color-gold)] hover:text-[color:var(--color-indigo)] mb-10 transition-colors"
         >
           <ArrowLeft size={16} /> Back to Case Studies
         </Link>
 
         {/* Company badge */}
-        <span className="inline-block rounded-full bg-[#F7FAF8] border border-[#52B788]/30 px-4 py-1.5 text-sm text-[#2D6A4F] font-medium mb-5">
+        <span className="inline-block rounded-full bg-[color:var(--color-cream)] border border-[color:var(--color-border-gold)] px-4 py-1.5 text-sm text-[color:var(--color-indigo)] font-medium mb-5">
           {study.fields.company}
         </span>
 
-        <h1 className="font-serif text-4xl sm:text-5xl text-[#1A3A2E] leading-tight mb-6">
+        <h1 className="font-serif text-4xl sm:text-5xl text-[color:var(--color-indigo)] leading-tight mb-6">
           {study.fields.title}
         </h1>
 
-        <p className="text-sm text-[#0F1A14]/50 mb-10 pb-10 border-b border-gray-100">
+        <p className="text-sm text-[color:var(--color-text-tertiary)] mb-10 pb-10 border-b border-[color:var(--color-border-light)]">
           Published {formatDate(study.fields.publishedDate)}
         </p>
 
         {/* Impact summary card */}
-        <div className="mb-10 rounded-2xl bg-[#1A3A2E] p-6 flex items-start gap-4">
-          <div className="h-10 w-10 rounded-lg bg-[#52B788]/20 flex items-center justify-center text-[#95D5B2] shrink-0">
+        <div className="mb-10 rounded-2xl bg-[color:var(--color-indigo)] p-6 flex items-start gap-4">
+          <div className="h-10 w-10 rounded-lg bg-[color:var(--color-cream)]/10 flex items-center justify-center text-[color:var(--color-gold)] shrink-0">
             <TrendingUp size={20} />
           </div>
           <div>
-            <p className="text-[#95D5B2] text-xs font-medium uppercase tracking-widest mb-1">
+            <p className="text-[color:var(--color-gold)] text-xs font-medium uppercase tracking-widest mb-1">
               Impact Summary
             </p>
-            <p className="text-white text-lg font-medium">
+            <p className="text-[color:var(--color-text-on-dark)] text-lg font-medium">
               {study.fields.impactSummary}
             </p>
           </div>
         </div>
 
         {/* Excerpt */}
-        <p className="text-xl text-[#0F1A14]/60 leading-relaxed mb-10 font-medium">
+        <p className="text-xl text-[color:var(--color-text-secondary)] leading-relaxed mb-10 font-medium">
           {study.fields.excerpt}
         </p>
 
@@ -90,7 +90,7 @@ export default async function CaseStudyPage({
         {study.fields.body?.content?.length > 0 ? (
           <RichTextRenderer document={study.fields.body} />
         ) : (
-          <p className="text-[#0F1A14]/50 italic">
+          <p className="text-[color:var(--color-text-tertiary)] italic">
             Full case study coming soon.
           </p>
         )}

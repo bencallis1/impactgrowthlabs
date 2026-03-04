@@ -53,18 +53,18 @@ export default async function TeamPage() {
   const activeGroups = MEMBER_TYPES.filter((type) => grouped[type].length > 0);
 
   return (
-    <div className="min-h-screen bg-[#F7FAF8] pt-28 pb-24">
+    <div className="min-h-screen bg-[color:var(--color-cream)] pt-28 pb-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
         <AnimatedSection className="mb-16">
-          <p className="text-[#52B788] text-sm font-medium tracking-widest uppercase mb-4">
+          <p className="text-[color:var(--color-gold)] text-sm font-medium tracking-widest uppercase mb-4">
             Our People
           </p>
-          <h1 className="font-serif text-5xl sm:text-6xl text-[#1A3A2E] mb-6">
+          <h1 className="font-serif text-5xl sm:text-6xl text-[color:var(--color-indigo)] mb-6">
             The team
           </h1>
-          <p className="max-w-2xl text-lg text-[#0F1A14]/60">
+          <p className="max-w-2xl text-lg text-[color:var(--color-text-secondary)]">
             Operators, scientists, and sector experts who have built at scale —
             now working alongside founders to create lasting impact.
           </p>
@@ -74,7 +74,7 @@ export default async function TeamPage() {
         <div className="space-y-16">
           {activeGroups.map((type) => (
             <AnimatedSection key={type}>
-              <h2 className="font-serif text-2xl text-[#1A3A2E] mb-6 pb-3 border-b border-[#52B788]/20">
+              <h2 className="font-serif text-2xl text-[color:var(--color-indigo)] mb-6 pb-3 border-b border-[color:var(--color-border-gold)]">
                 {TYPE_LABELS[type]}
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

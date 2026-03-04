@@ -1,0 +1,18 @@
+.divider {
+  height: 0.5px;
+  background: var(--color-gold, #C9943A);
+  opacity: 0.3;
+}
+
+.full {
+  width: 100%;
+}
+
+.medium {
+  width: 200px;
+}
+
+.short {
+  width: 80px;
+}
+

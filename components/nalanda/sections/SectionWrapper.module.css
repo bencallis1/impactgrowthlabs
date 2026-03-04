@@ -1,0 +1,39 @@
+.section {
+  padding: var(--section-y) var(--section-x);
+}
+
+.cream {
+  background: var(--parchment);
+}
+
+.white {
+  background: var(--parchment);
+}
+
+.indigo {
+  background: var(--nocturne);
+}
+
+.forest {
+  background: var(--nocturne-2);
+}
+
+.gold {
+  background: var(--amber);
+}
+
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.narrow {
+  max-width: 820px;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: var(--space-20, 5rem) var(--space-8, 2rem);
+  }
+}
+
