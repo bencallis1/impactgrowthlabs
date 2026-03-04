@@ -24,7 +24,7 @@ export default async function HomePage() {
   return (
     <>
       <Hero />
-      {/* <ImpactMetrics /> */}
+      <ImpactMetrics />
       <Services />
       <Portfolio companies={companies} />
       <Team members={members} />

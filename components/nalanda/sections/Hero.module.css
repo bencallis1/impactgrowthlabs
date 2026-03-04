@@ -1,0 +1,146 @@
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10rem 4rem 6rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.dark {
+  background: var(--color-indigo, #1B1F4B);
+}
+
+.dark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 40% 60%,
+    rgba(201, 148, 58, 0.06) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.light {
+  background: var(--color-cream, #F5EFE0);
+}
+
+.inner {
+  max-width: 900px;
+  position: relative;
+  z-index: 1;
+}
+
+.headline {
+  font-family: var(--font-serif, Georgia, "Times New Roman", serif);
+  font-size: var(--text-hero, clamp(3rem, 7vw, 7rem));
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.1;
+  margin-bottom: 2rem;
+}
+
+.dark .headline {
+  color: var(--color-cream, #F5EFE0);
+}
+
+.light .headline {
+  color: var(--color-indigo, #1B1F4B);
+}
+
+.subheadline {
+  font-family: var(--font-serif, Georgia, "Times New Roman", serif);
+  font-size: clamp(1rem, 1.5vw, 1.3rem);
+  font-weight: 300;
+  line-height: 1.7;
+  max-width: 620px;
+  margin-bottom: 3rem;
+}
+
+.dark .subheadline {
+  color: rgba(245, 239, 224, 0.55);
+}
+
+.light .subheadline {
+  color: rgba(27, 31, 75, 0.6);
+}
+
+.divider {
+  margin: 2rem 0 1.5rem;
+}
+
+.secondaryLine {
+  font-family: var(--font-serif, Georgia, "Times New Roman", serif);
+  font-size: 0.85rem;
+  font-style: italic;
+  letter-spacing: 0.1em;
+  margin-bottom: 3rem;
+}
+
+.dark .secondaryLine {
+  color: rgba(245, 239, 224, 0.3);
+}
+
+.light .secondaryLine {
+  color: rgba(27, 31, 75, 0.4);
+}
+
+.ctas {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.scrollIndicator {
+  position: absolute;
+  bottom: 3rem;
+  left: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.scrollText {
+  font-family: var(--font-sans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(245, 239, 224, 0.25);
+}
+
+.scrollLine {
+  width: 1px;
+  height: 50px;
+  background: linear-gradient(
+    to bottom,
+    rgba(201, 148, 58, 0.4),
+    transparent
+  );
+  animation: scrollPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 8rem 2rem 5rem;
+  }
+
+  .scrollIndicator {
+    left: 2rem;
+  }
+}
+

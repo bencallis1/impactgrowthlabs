@@ -17,53 +17,57 @@ const benefits = [
 
 export default function ApplyPage() {
   return (
-    <div className="min-h-screen bg-[#F7FAF8] pt-28 pb-24">
+    <div className="min-h-screen bg-[color:var(--color-cream)] pt-28 pb-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           {/* Left: Info */}
           <div className="lg:sticky lg:top-28">
-            <p className="text-[#52B788] text-sm font-medium tracking-widest uppercase mb-4">
+            <p className="text-[color:var(--color-gold)] text-sm font-medium tracking-widest uppercase mb-4">
               Founders
             </p>
-            <h1 className="font-serif text-5xl text-[#1A3A2E] mb-6 leading-tight">
+            <h1 className="font-serif text-5xl text-[color:var(--color-indigo)] mb-6 leading-tight">
               Apply to partner with us
             </h1>
-            <p className="text-lg text-[#0F1A14]/60 mb-8 leading-relaxed">
+            <p className="text-lg text-[color:var(--color-text-secondary)] mb-8 leading-relaxed">
               We invest in pre-seed and seed-stage founders building companies
               at the intersection of business and meaningful impact. We read
               every application.
             </p>
 
             <div className="space-y-3">
-              <p className="text-sm font-semibold text-[#1A3A2E] uppercase tracking-wider">
+              <p className="text-sm font-semibold text-[color:var(--color-indigo)] uppercase tracking-wider">
                 What you get
               </p>
               {benefits.map((benefit) => (
                 <div key={benefit} className="flex items-start gap-3">
                   <CheckCircle
                     size={18}
-                    className="text-[#52B788] mt-0.5 shrink-0"
+                    className="text-[color:var(--color-gold)] mt-0.5 shrink-0"
                   />
-                  <p className="text-sm text-[#0F1A14]/70">{benefit}</p>
+                  <p className="text-sm text-[color:var(--color-text-secondary)]">
+                    {benefit}
+                  </p>
                 </div>
               ))}
             </div>
 
-            <div className="mt-10 rounded-xl bg-white border border-gray-100 p-5">
-              <p className="text-xs text-[#0F1A14]/40 uppercase tracking-wider mb-2">
+            <div className="mt-10 rounded-xl bg-[#ffffff] border border-[color:var(--color-border-light)] p-5">
+              <p className="text-xs text-[color:var(--color-text-tertiary)] uppercase tracking-wider mb-2">
                 Response Time
               </p>
-              <p className="text-sm text-[#0F1A14]/70">
+              <p className="text-sm text-[color:var(--color-text-secondary)]">
                 We aim to respond to every application within{" "}
-                <strong className="text-[#1A3A2E]">5 business days</strong>.
+                <strong className="text-[color:var(--color-indigo)]">
+                  5 business days
+                </strong>
                 Promising applications move to a 30-minute intro call.
               </p>
             </div>
           </div>
 
           {/* Right: Form */}
-          <div className="rounded-2xl bg-white border border-gray-100 p-8 shadow-sm">
-            <h2 className="font-serif text-2xl text-[#1A3A2E] mb-8">
+          <div className="rounded-2xl bg-[#ffffff] border border-[color:var(--color-border-light)] p-8 shadow-sm">
+            <h2 className="font-serif text-2xl text-[color:var(--color-indigo)] mb-8">
               Your application
             </h2>
             <FounderApplicationForm />

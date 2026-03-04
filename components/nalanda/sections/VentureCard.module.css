@@ -1,0 +1,70 @@
+.card {
+  display: block;
+  padding: 2.5rem;
+  background: #ffffff;
+  border-top: 2px solid var(--color-gold, #C9943A);
+  text-decoration: none;
+  transition: var(--transition-base, all 0.3s ease);
+  color: inherit;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.name {
+  font-family: var(--font-serif, Georgia, "Times New Roman", serif);
+  font-size: 1.4rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--color-indigo, #1B1F4B);
+  line-height: 1.2;
+}
+
+.tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+
+.description {
+  font-family: var(--font-serif, Georgia, "Times New Roman", serif);
+  font-size: 1rem;
+  color: var(--color-indigo, #1B1F4B);
+  opacity: 0.7;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+.whatDrewUs {
+  font-family: var(--font-serif, Georgia, "Times New Roman", serif);
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--color-indigo, #1B1F4B);
+  opacity: 0.55;
+  line-height: 1.8;
+  margin-bottom: 1rem;
+  padding-top: 1rem;
+  border-top: 0.5px solid var(--color-border-light, rgba(27, 31, 75, 0.1));
+}
+
+.quote {
+  font-family: var(--font-serif, Georgia, "Times New Roman", serif);
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--color-gold, #C9943A);
+  opacity: 0.8;
+  border-left: 2px solid var(--color-gold, #C9943A);
+  padding-left: 1rem;
+  margin: 0;
+}
+

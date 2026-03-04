@@ -27,18 +27,18 @@ const highlights = [
 
 export default function InvestPage() {
   return (
-    <div className="min-h-screen bg-[#F7FAF8] pt-28 pb-24">
+    <div className="min-h-screen bg-[color:var(--color-cream)] pt-28 pb-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           {/* Left */}
           <div className="lg:sticky lg:top-28">
-            <p className="text-[#52B788] text-sm font-medium tracking-widest uppercase mb-4">
+            <p className="text-[color:var(--color-gold)] text-sm font-medium tracking-widest uppercase mb-4">
               Investors
             </p>
-            <h1 className="font-serif text-5xl text-[#1A3A2E] mb-6 leading-tight">
+            <h1 className="font-serif text-5xl text-[color:var(--color-indigo)] mb-6 leading-tight">
               Invest in what matters
             </h1>
-            <p className="text-lg text-[#0F1A14]/60 mb-10 leading-relaxed">
+            <p className="text-lg text-[color:var(--color-text-secondary)] mb-10 leading-relaxed">
               We work with family offices, foundations, HNW individuals, and
               institutional LPs who are serious about generating both financial
               returns and measurable impact.
@@ -49,14 +49,14 @@ export default function InvestPage() {
                 const Icon = h.icon;
                 return (
                   <div key={h.title} className="flex items-start gap-4">
-                    <div className="h-10 w-10 rounded-xl bg-[#1A3A2E] flex items-center justify-center text-[#95D5B2] shrink-0">
+                    <div className="h-10 w-10 rounded-xl bg-[color:var(--color-indigo)] flex items-center justify-center text-[color:var(--color-gold)] shrink-0">
                       <Icon size={18} />
                     </div>
                     <div>
-                      <p className="font-semibold text-[#1A3A2E] mb-1">
+                      <p className="font-semibold text-[color:var(--color-indigo)] mb-1">
                         {h.title}
                       </p>
-                      <p className="text-sm text-[#0F1A14]/60 leading-relaxed">
+                      <p className="text-sm text-[color:var(--color-text-secondary)] leading-relaxed">
                         {h.body}
                       </p>
                     </div>
@@ -65,13 +65,16 @@ export default function InvestPage() {
               })}
             </div>
 
-            <div className="mt-10 rounded-xl bg-[#1A3A2E] p-5 text-white">
-              <p className="text-xs text-[#95D5B2] uppercase tracking-wider mb-2">
+            <div className="mt-10 rounded-xl bg-[color:var(--color-indigo)] p-5 text-[color:var(--color-text-on-dark)]">
+              <p className="text-xs text-[color:var(--color-gold)] uppercase tracking-wider mb-2">
                 Already an LP?
               </p>
-              <p className="text-sm text-white/70">
+              <p className="text-sm text-[color:var(--color-text-on-dark-secondary)]">
                 Access your portfolio data, reports, and impact dashboard in the{" "}
-                <a href="/portal" className="text-[#95D5B2] underline">
+                <a
+                  href="/portal"
+                  className="text-[color:var(--color-gold)] underline"
+                >
                   Investor Portal
                 </a>
                 .
@@ -80,8 +83,8 @@ export default function InvestPage() {
           </div>
 
           {/* Right: Form */}
-          <div className="rounded-2xl bg-white border border-gray-100 p-8 shadow-sm">
-            <h2 className="font-serif text-2xl text-[#1A3A2E] mb-8">
+          <div className="rounded-2xl bg-[#ffffff] border border-[color:var(--color-border-light)] p-8 shadow-sm">
+            <h2 className="font-serif text-2xl text-[color:var(--color-indigo)] mb-8">
               Investor inquiry
             </h2>
             <InvestorInquiryForm />
