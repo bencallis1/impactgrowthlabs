@@ -1,361 +1,179 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import { AnimatedSection } from "@/components/ui/AnimatedSection";
-import {
-  CheckCircle,
-} from "lucide-react";
+import { CheckCircle } from "lucide-react";
+import { Hero } from "@/components/nalanda/sections/Hero";
+import { SectionWrapper } from "@/components/nalanda/sections/SectionWrapper";
+import { SectionHeader } from "@/components/nalanda/sections/SectionHeader";
+import { FadeIn } from "@/components/nalanda/ui/FadeIn";
 
 export const metadata: Metadata = {
   title: "What is Impact?",
   description:
-    "Impact investing means generating measurable positive outcomes for people and planet — alongside financial returns. Explore our philosophy, focus areas, and measurement framework.",
+    "Impact is not a marketing category. It is a way of building with coherence, accountability, and loving kindness toward all living things.",
 };
-
-
 
 const measurementPillars = [
   {
-    title: "Theory of Change Development",
-    body: "a clearly articulated pathway from business activity to measurable outcome to long-term systemic shift",
+    title: "Clarity of change",
+    body: "A clearly articulated path from business activity to measurable outcome to long-horizon systemic shift.",
   },
   {
-    title: "CERT Tech Impact Measurement",
-    body: "eal-time impact verification tools that go far beyond quarterly self-reporting",
+    title: "Truthful data",
+    body: "Evidence that is specific, verifiable, and updated as the work evolves — not just annual reports.",
   },
   {
-    title: "Bronze and Silver Impact Certification",
-    body: "independent, third-party verification of impact claims at each program stage",
+    title: "Coherence checks",
+    body: "Regular audits of whether mission, method, and capital structure are still in alignment.",
   },
   {
-    title: "Ongoing Impact Mentorship",
-    body: "guidance from practitioners with over 30 years of hands-on impact project experience across four continents",
+    title: "Listening to the field",
+    body: "Structured feedback from the people and places most affected by the work, not only investors.",
   },
 ];
-
-const practiceStats = [
-  { value: "$48M+", label: "Capital deployed" },
-  { value: "24", label: "Active portfolio companies" },
-  { value: "2.4M", label: "Tonnes of CO₂ avoided" },
-  { value: "145K+", label: "Lives directly reached" },
-  { value: "6", label: "Countries of operation" },
-  { value: "100%", label: "SDG-aligned investments" },
-];
-
-// ── Page ─────────────────────────────────────────────────────────────────────
 
 export default function WhatIsImpactPage() {
   return (
-    <div className="min-h-screen bg-[color:var(--color-cream)]">
-      {/* ── Hero ── */}
-      <section className="relative h-[92vh] min-h-[600px] flex items-center">
-        {/* Background image */}
-        <Image
-          src="https://imagedelivery.net/lcKdEvt7ci2YjdeNVK02Iw/f229994d-d0d8-4f43-de8d-9a6c4d63d300/Originals"
-          alt="Aerial view of a lush green forest canopy"
-          fill
-          priority
-          className="object-cover object-center"
-          sizes="100vw"
-        />
-        {/* Gradient overlay — deep green at bottom, semi-transparent at top */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[color:var(--color-indigo)]/60 via-[color:var(--color-indigo)]/70 to-[color:var(--color-indigo)]/85" />
+    <main>
+      <Hero
+        eyebrow="Our philosophy"
+        headline={"What impact really\nasks of us."}
+        subheadline="The challenges facing people and the living world are serious, specific, and already here. Impact is not a marketing category; it is a way of building with coherence and accountability to all living things."
+        secondaryLine="Named after the university that lasted 700 years. Guided by Maitri (मैत्री) — unconditional loving kindness toward all living things."
+        ctas={[
+          { label: "Explore our work →", href: "/ventures" },
+          {
+            label: "Tell us about your work →",
+            href: "/apply",
+            variant: "text",
+          },
+        ]}
+        variant="light"
+      />
 
-        {/* Content */}
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
-          <AnimatedSection>
-            <p className="text-[color:var(--color-gold)] text-sm font-medium tracking-widest uppercase mb-6">
-              Our Philosophy
-            </p>
-            <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl text-[color:var(--color-text-on-dark)] max-w-3xl leading-[1.1] mb-6">
-              What is
-              <br />
-              impact?
-            </h1>
-            <p className="text-[color:var(--color-text-on-dark-secondary)] text-xl max-w-xl leading-relaxed">
-              Real impact isn&apos;t a compromise between doing good and doing
-              well. It&apos;s the natural result of building businesses that
-              solve the world&apos;s most pressing problems.
-            </p>
-          </AnimatedSection>
-        </div>
+      <SectionWrapper variant="cream" narrow>
+        <FadeIn>
+          <p>
+            “Impact investing” describes the practice of deploying capital with
+            the explicit intention to generate positive, measurable social or
+            environmental outcomes — alongside financial returns. The Nalanda
+            Collective treats those outcomes not as a trade-off, but as a test
+            of coherence between mission and method.
+          </p>
+        </FadeIn>
+      </SectionWrapper>
 
-        {/* Bottom fade into white */}
-        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[color:var(--color-cream)] to-transparent" />
-      </section>
-
-      {/* ── Intro ── */}
-      <section className="py-20 bg-[color:var(--color-cream)]">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="max-w-3xl mx-auto text-center">
-            <p className="text-2xl sm:text-3xl font-serif text-[color:var(--color-indigo)] leading-relaxed">
-              &ldquo;Impact investing&rdquo; describes the practice of deploying
-              capital with the explicit intention to generate positive,
-              measurable social or environmental outcomes — alongside financial
-              returns.
-            </p>
-            <p className="mt-6 text-lg text-[color:var(--color-text-secondary)]">
-              At Impact Growth Labs, we believe those two goals are not in
-              tension. They are the same goal.
-            </p>
-          </AnimatedSection>
-        </div>
-      </section>
-
-      {/* ── Section 1: What impact investing is — text left, image right ── */}
-      <section className="py-24 bg-[color:var(--color-cream)]">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            {/* Text */}
-              <AnimatedSection>
-                <p className="text-[color:var(--color-gold)] text-sm font-medium tracking-widest uppercase mb-4">
-                More Than a Metric.
+      <SectionWrapper variant="cream">
+        <div className="grid-split">
+          <div>
+            <SectionHeader
+              eyebrow="More than a metric"
+              headline={"Impact as a way\nof building."}
+              subhead="Impact is not a reporting framework layered on top of an otherwise extractive model. It is the natural result of how a venture is designed, governed, and scaled."
+              align="left"
+              variant="light"
+            />
+            <FadeIn>
+              <p>
+                Impact investing has become a widely used phrase — but for us,
+                it names something more fundamental than a category of funds. It
+                is a commitment to build ventures that create measurable,
+                positive change in the world as a direct consequence of how
+                they operate, not as an afterthought.
               </p>
-                <h2 className="font-serif text-4xl sm:text-5xl text-[color:var(--color-indigo)] mb-6 leading-tight">
-                A Way of Building.
-                <br />
-                with purpose
-              </h2>
-                <div className="space-y-4 text-[color:var(--color-text-secondary)] text-lg leading-relaxed">
-                <p>
-                  Impact investing has become a widely used phrase — but for us,
-                  it describes something more fundamental than an investment
-                category or a reporting framework. At BGSImpact, impact means
-                  building ventures that create measurable, positive change in
-                  the world as a direct result of how they operate, not as an
-                  afterthought. We believe that entrepreneurs who set out to
-                  solve humanity&apos;s greatest challenges — in health, education,
-                  energy, the environment, and beyond — are building the most
-                  important companies of this generation.
-                </p>
-                <p>
-                  And with the right support, they can also build the most
-                  profitable ones. We don&apos;t ask founders to choose between
-                  financial ambition and meaningful purpose. Through our
-                  Risk-Return-Impact model, we help them demonstrate that these
-                  goals are not in tension — they are the same goal, pursued
-                  together.
-                </p>
-              </div>
-            </AnimatedSection>
-
-            {/* Image */}
-            <AnimatedSection delay={0.15}>
-              <div className="relative rounded-3xl overflow-hidden aspect-[4/3] shadow-2xl">
-                <Image
-                  src="https://imagedelivery.net/lcKdEvt7ci2YjdeNVK02Iw/ae414f8e-27f1-4ce4-273a-7b72e2531700/Originals"
-                  alt="Team collaborating around a table, engaged in purposeful discussion"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-                {/* Subtle brand overlay */}
-                <div className="absolute inset-0 bg-[#1A3A2E]/10" />
-              </div>
-            </AnimatedSection>
+              <p>
+                When founders design from this premise, questions about impact
+                are not a compliance exercise. They are design constraints:
+                Who is served? What is restored? What remains for the seventh
+                generation? The answers shape everything from product to
+                capital structure.
+              </p>
+            </FadeIn>
           </div>
         </div>
-      </section>
+      </SectionWrapper>
 
-      {/* ── Section 2: Our impact thesis — image left, text right ── */}
-      <section className="py-24 bg-[color:var(--color-cream)]">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            {/* Image — appears first on mobile, left on desktop */}
-            <AnimatedSection delay={0.1} className="order-2 lg:order-1">
-              <div className="relative rounded-3xl overflow-hidden aspect-[4/3] shadow-2xl">
-                <Image
-                  src="https://imagedelivery.net/lcKdEvt7ci2YjdeNVK02Iw/f229994d-d0d8-4f43-de8d-9a6c4d63d300/Originals"
-                  alt="Hands cradling a green plant, symbolising environmental stewardship"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-                <div className="absolute inset-0 bg-[#1A3A2E]/10" />
-              </div>
-            </AnimatedSection>
-
-            {/* Text */}
-            <AnimatedSection className="order-1 lg:order-2">
-              <p className="text-[color:var(--color-gold)] text-sm font-medium tracking-widest uppercase mb-4">
-                The Artificial Separation
+      <SectionWrapper variant="cream">
+        <div className="grid-split">
+          <div>
+            <SectionHeader
+              eyebrow="The artificial separation"
+              headline={"Returns and impact\nare not opposites."}
+              subhead="For decades, capital has operated as if doing good and doing well were in tension. The evidence — and Nalanda’s precedent — suggest otherwise."
+              align="left"
+              variant="light"
+            />
+            <FadeIn>
+              <p>
+                Traditional investing has often assumed that financial returns
+                and positive impact require trade-offs. That purpose is a cost
+                centre. That doing good means doing less well. Our experience —
+                and the broader landscape — suggest that this framing is
+                incomplete at best.
               </p>
-              <h2 className="font-serif text-4xl sm:text-5xl text-[color:var(--color-indigo)] mb-6 leading-tight">
-                Has to End.
-                {/* <br />
-                thesis */}
-              </h2>
-              <p className="text-[color:var(--color-text-secondary)] text-lg leading-relaxed mb-8">
-                For decades, traditional investing has operated from a false
-                premise: that financial returns and positive impact require
-                trade-offs. That purpose costs something. That doing good means
-                doing less well. We&apos;ve seen the evidence — in our own
-                portfolio and across the broader landscape — that this isn&apos;t
-                true. Businesses that solve real problems tend to attract
-                mission-aligned talent, build more durable competitive
-                advantages, and operate in sectors with powerful societal
-                tailwinds. The most important markets of the next century are
-                defined by the world&apos;s most urgent challenges: clean energy,
-                food security, accessible healthcare, economic inclusion. The
-                entrepreneurs who address these challenges early, with the right
-                capital and operational support behind them, don&apos;t just make
-                the world better — they build exceptional businesses. BGSImpact
-                exists to prove this, one company at a time.
+              <p>
+                Ventures that solve real problems tend to attract
+                mission-aligned talent, build more durable advantages, and
+                operate in sectors with powerful societal tailwinds. Clean
+                energy, regenerative food systems, accessible healthcare,
+                economic inclusion — the markets that matter most over the next
+                century are defined by the challenges we are all already
+                living with. Founders who address those challenges early, with
+                coherent capital and support, do not have to choose between
+                impact and return.
               </p>
-              
-
-            </AnimatedSection>
+            </FadeIn>
           </div>
         </div>
-      </section>
+      </SectionWrapper>
 
-      {/* ── Section 3: How we measure impact — text left, image right ── */}
-      <section className="py-24 bg-[color:var(--color-cream)]">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            {/* Text */}
-            <AnimatedSection>
-              <p className="text-[color:var(--color-gold)] text-sm font-medium tracking-widest uppercase mb-4">
-                An Impact Claim Without Evidence Is Just Marketing.
+      <SectionWrapper variant="cream">
+        <div className="grid-split">
+          <div>
+            <SectionHeader
+              eyebrow="Evidence, not aspiration"
+              headline={"How we measure\nwhat matters."}
+              subhead="An impact claim without evidence is just marketing. Measurement is how we learn, adjust, and stay honest about what our work is actually doing in the world."
+              align="left"
+              variant="light"
+            />
+            <FadeIn>
+              <p>
+                We hold ourselves — and the founders we work with — to a
+                rigorous standard of impact measurement. Not because investors
+                demand it, but because truth-telling is the only reliable
+                foundation for long-horizon work.
               </p>
-              <h2 className="font-serif text-4xl sm:text-5xl text-[color:var(--color-indigo)] mb-6 leading-tight">
-                How we measure
-                <br />
-                what matters
-              </h2>
-              <p className="text-[color:var(--color-text-secondary)] text-lg leading-relaxed mb-8">
-                We hold ourselves and the ventures we support to a rigorous
-                standard of impact measurement — not because investors demand it
-                (though they do), but because measurement is how we learn,
-                improve, and demonstrate truth.
+              <p>
+                Every venture we partner with works through a shared
+                measurement practice that includes:
               </p>
-
-              <p className="text-[color:var(--color-text-secondary)] text-lg leading-relaxed mb-8">
-                Every venture in our programs works through our Risk-Return-Impact curriculum, which provides:
-              </p>
-              <div className="space-y-4">
+              <ul>
                 {measurementPillars.map((pillar) => (
-                  <div key={pillar.title} className="flex gap-4">
-                    <CheckCircle
-                      size={20}
-                      className="shrink-0 mt-0.5 text-[color:var(--color-gold)]"
-                    />
-                    <div>
-                      <p className="font-semibold text-[color:var(--color-indigo)] mb-0.5">
-                        {pillar.title}
-                      </p>
-                      <p className="text-sm text-[color:var(--color-text-secondary)] leading-relaxed">
-                        {pillar.body}
-                      </p>
+                  <li key={pillar.title}>
+                    <div style={{ display: "flex", gap: "0.75rem" }}>
+                      <CheckCircle
+                        size={20}
+                        style={{ flexShrink: 0, marginTop: "0.25rem" }}
+                      />
+                      <div>
+                        <p>{pillar.title}</p>
+                        <p>{pillar.body}</p>
+                      </div>
                     </div>
-                  </div>
+                  </li>
                 ))}
-              </div>
-              <p className="text-[color:var(--color-text-secondary)] text-lg leading-relaxed mt-8 mb-8">
+              </ul>
+              <p>
                 We believe the next generation of impact measurement will be
-                defined by real-time transparency and independent verification
-                — not by sanitized reports and vague sustainability claims.
-                We&apos;re building toward that future, and we invite the
-                ventures we work with to lead the way.
+                defined by real-time transparency and independent verification,
+                not by polished reports and vague sustainability claims. We are
+                building toward that future — and we invite the ventures we
+                work with to lead, and learn, alongside us.
               </p>
-
-            </AnimatedSection>
-
-            {/* Image */}
-            <AnimatedSection delay={0.15}>
-              <div className="relative rounded-3xl overflow-hidden aspect-[4/3] shadow-2xl">
-                <Image
-                  src="https://imagedelivery.net/lcKdEvt7ci2YjdeNVK02Iw/0c736f2c-ef12-45e5-2566-bf79ae470700/Originals"
-                  alt="Data analytics dashboard showing impact metrics and performance charts"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-                <div className="absolute inset-0 bg-[#1A3A2E]/10" />
-              </div>
-            </AnimatedSection>
+            </FadeIn>
           </div>
         </div>
-      </section>
-
-      {/* ── Section 4: Impact in practice — dark metrics band ── */}
-      {/* <section className="py-24 bg-[#1A3A2E]">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="text-center mb-16">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <BarChart3 size={18} className="text-[#52B788]" />
-              <p className="text-[#52B788] text-sm font-medium tracking-widest uppercase">
-                Impact in Practice
-              </p>
-            </div>
-            <h2 className="font-serif text-4xl sm:text-5xl text-white mb-4">
-              Numbers that reflect<br />what we stand for
-            </h2>
-            <p className="text-white/60 text-lg max-w-xl mx-auto">
-              Across our portfolio, these are the outcomes generated since
-              our first investment in 2020.
-            </p>
-          </AnimatedSection>
-
-          <AnimatedSection delay={0.1}>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-px bg-white/10 rounded-2xl overflow-hidden">
-              {practiceStats.map((stat) => (
-                <div
-                  key={stat.label}
-                  className="bg-[#1A3A2E] px-8 py-10 text-center hover:bg-[#2D6A4F]/40 transition-colors"
-                >
-                  <p className="font-serif text-4xl sm:text-5xl text-[#52B788] mb-2">
-                    {stat.value}
-                  </p>
-                  <p className="text-sm text-white/60 uppercase tracking-widest">
-                    {stat.label}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </AnimatedSection>
-
-          <AnimatedSection delay={0.2} className="mt-12 text-center">
-            <p className="text-white/40 text-sm">
-              Data reflects portfolio activity as of December 2024. Impact figures
-              are self-reported by portfolio companies and independently reviewed
-              annually.
-            </p>
-          </AnimatedSection>
-        </div>
-      </section> */}
-
-      {/* ── CTA ── */}
-      {/* <section className="py-24 bg-white">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="max-w-2xl">
-            <p className="text-[#52B788] text-sm font-medium tracking-widest uppercase mb-4">
-              Join the Conversation
-            </p>
-            <h2 className="font-serif text-4xl sm:text-5xl text-[#1A3A2E] mb-6">
-              Ready to explore what impact means for your work?
-            </h2>
-            <p className="text-lg text-[#0F1A14]/60 mb-8 leading-relaxed">
-              Whether you&apos;re a founder building for impact or an investor
-              seeking alignment between values and returns, we&apos;d welcome
-              the conversation.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <a
-                href="/apply"
-                className="inline-flex items-center gap-2 rounded-full bg-[#1A3A2E] px-6 py-3 text-sm font-medium text-white hover:bg-[#2D6A4F] transition-colors"
-              >
-                Apply as a founder
-              </a>
-              <a
-                href="/case-studies"
-                className="inline-flex items-center gap-2 rounded-full border border-[#1A3A2E] px-6 py-3 text-sm font-medium text-[#1A3A2E] hover:bg-[#F7FAF8] transition-colors"
-              >
-                Explore our work
-              </a>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section> */}
-    </div>
+      </SectionWrapper>
+    </main>
   );
 }
+

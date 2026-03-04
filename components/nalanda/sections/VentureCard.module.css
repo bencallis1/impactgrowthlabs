@@ -1,19 +1,22 @@
 .card {
   display: block;
-  padding: 2.5rem;
-  background: #ffffff;
-  border-top: 2px solid var(--color-gold, #C9943A);
+  box-sizing: border-box;
+  width: 100%;
+  padding: var(--card-pad);
+  background: var(--parchment);
+  border: 2px solid var(--ink);
   text-decoration: none;
-  transition: var(--transition-base, all 0.3s ease);
+  transition: var(--transition);
   color: inherit;
 }
 
 .card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-2px);
 }
 
 .header {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: 1rem;
@@ -21,11 +24,11 @@
 }
 
 .name {
-  font-family: var(--font-serif, Georgia, "Times New Roman", serif);
-  font-size: 1.4rem;
-  font-weight: 400;
-  font-style: italic;
-  color: var(--color-indigo, #1B1F4B);
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-style: normal;
+  color: var(--ink);
   line-height: 1.2;
 }
 
@@ -37,33 +40,34 @@
 }
 
 .description {
-  font-family: var(--font-serif, Georgia, "Times New Roman", serif);
-  font-size: 1rem;
-  color: var(--color-indigo, #1B1F4B);
-  opacity: 0.7;
+  font-family: var(--sans);
+  font-size: var(--text-body);
+  color: var(--text-body);
   line-height: 1.7;
   margin-bottom: 1rem;
+  overflow-wrap: break-word;
 }
 
 .whatDrewUs {
-  font-family: var(--font-serif, Georgia, "Times New Roman", serif);
+  font-family: var(--serif);
   font-size: 0.9rem;
   font-style: italic;
-  color: var(--color-indigo, #1B1F4B);
+  color: var(--ink);
   opacity: 0.55;
   line-height: 1.8;
   margin-bottom: 1rem;
   padding-top: 1rem;
   border-top: 0.5px solid var(--color-border-light, rgba(27, 31, 75, 0.1));
+  overflow-wrap: break-word;
 }
 
 .quote {
-  font-family: var(--font-serif, Georgia, "Times New Roman", serif);
+  font-family: var(--serif);
   font-size: 0.9rem;
   font-style: italic;
-  color: var(--color-gold, #C9943A);
+  color: var(--amber);
   opacity: 0.8;
-  border-left: 2px solid var(--color-gold, #C9943A);
+  border-left: 2px solid var(--ink);
   padding-left: 1rem;
   margin: 0;
 }

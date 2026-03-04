@@ -16,7 +16,7 @@ interface HeroProps {
   subheadline?: string;
   secondaryLine?: string;
   ctas?: HeroCTA[];
-  variant?: "dark" | "light";
+  variant?: "light";
   showScrollIndicator?: boolean;
 }
 
@@ -26,7 +26,7 @@ export function Hero({
   subheadline,
   secondaryLine,
   ctas = [],
-  variant = "dark",
+  variant = "light",
   showScrollIndicator = true,
 }: HeroProps) {
   const headlineLines = headline.split("\n");

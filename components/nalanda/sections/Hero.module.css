@@ -3,29 +3,13 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 10rem 4rem 6rem;
+  padding: var(--section-y) var(--section-x);
   position: relative;
   overflow: hidden;
 }
 
-.dark {
-  background: var(--color-indigo, #1B1F4B);
-}
-
-.dark::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    ellipse at 40% 60%,
-    rgba(201, 148, 58, 0.06) 0%,
-    transparent 70%
-  );
-  pointer-events: none;
-}
-
 .light {
-  background: var(--color-cream, #F5EFE0);
+  background: var(--parchment);
 }
 
 .inner {
@@ -35,37 +19,29 @@
 }
 
 .headline {
-  font-family: var(--font-serif, Georgia, "Times New Roman", serif);
-  font-size: var(--text-hero, clamp(3rem, 7vw, 7rem));
-  font-weight: 300;
-  font-style: italic;
+  font-family: var(--serif);
+  font-size: var(--text-hero);
+  font-weight: 900;
+  font-style: normal;
   line-height: 1.1;
   margin-bottom: 2rem;
 }
 
-.dark .headline {
-  color: var(--color-cream, #F5EFE0);
-}
-
 .light .headline {
-  color: var(--color-indigo, #1B1F4B);
+  color: var(--ink);
 }
 
 .subheadline {
-  font-family: var(--font-serif, Georgia, "Times New Roman", serif);
-  font-size: clamp(1rem, 1.5vw, 1.3rem);
+  font-family: var(--sans);
+  font-size: var(--text-body-lg);
   font-weight: 300;
   line-height: 1.7;
   max-width: 620px;
   margin-bottom: 3rem;
 }
 
-.dark .subheadline {
-  color: rgba(245, 239, 224, 0.55);
-}
-
 .light .subheadline {
-  color: rgba(27, 31, 75, 0.6);
+  color: var(--text-body);
 }
 
 .divider {
@@ -73,19 +49,14 @@
 }
 
 .secondaryLine {
-  font-family: var(--font-serif, Georgia, "Times New Roman", serif);
+  font-family: var(--sans);
   font-size: 0.85rem;
-  font-style: italic;
   letter-spacing: 0.1em;
   margin-bottom: 3rem;
 }
 
-.dark .secondaryLine {
-  color: rgba(245, 239, 224, 0.3);
-}
-
 .light .secondaryLine {
-  color: rgba(27, 31, 75, 0.4);
+  color: var(--text-muted);
 }
 
 .ctas {
@@ -106,11 +77,11 @@
 }
 
 .scrollText {
-  font-family: var(--font-sans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
+  font-family: var(--sans);
   font-size: 0.65rem;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: rgba(245, 239, 224, 0.25);
+  color: var(--text-muted);
 }
 
 .scrollLine {
@@ -136,7 +107,7 @@
 
 @media (max-width: 768px) {
   .hero {
-    padding: 8rem 2rem 5rem;
+    padding: 5rem 2rem;
   }
 
   .scrollIndicator {

@@ -2,53 +2,117 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  /* Brand colors */
-  --color-primary:        #1A3A2E;
-  --color-primary-light:  #2D6A4F;
-  --color-accent:         #52B788;
-  --color-accent-light:   #95D5B2;
-  --color-surface:        #F7FAF8;
-  --color-surface-dark:   #0F1A14;
-  --color-muted:          #64748B;
+  /* Design tokens from docs/rules.md v3.0 */
+  --parchment:       #EDEAE0;
+  --parchment-d:     #E5E1D4;
+  --ink:             #14120E;
+  --ink-2:           #1e1b15;
+  --amber:           #B8832A;
+  --nocturne:        #080810;
+  --nocturne-2:      #0d0d1c;
+  --gold:            #C9943A;
+  --cream:           #F5EFE0;
+  --border:          rgba(20,18,14,.12);
+  --border-dark:     rgba(20,18,14,.22);
+  --text-body:       rgba(20,18,14,.45);
+  --text-muted:      rgba(20,18,14,.28);
+  --text-body-dark:  rgba(245,239,224,.32);
+  --text-muted-dark: rgba(245,239,224,.18);
 
-  /* Fonts */
-  --font-sans:   var(--font-inter);
-  --font-serif:  var(--font-dm-serif);
+  /* Typography */
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans:  'Inter', system-ui, sans-serif;
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #0F1A14;
+  --background: var(--parchment);
+  --foreground: var(--ink);
 
-  /* Nalanda palette & tokens (from .cursorrules) */
-  --color-indigo:       #1B1F4B;
-  --color-gold:         #C9943A;
-  --color-cream:        #F5EFE0;
-  --color-terracotta:   #A85C40;
-  --color-sage:         #8FAF8A;
-  --color-forest:       #2C4A3E;
+  /* Typography roles (approximate scale from rules) */
+  --text-xs: 0.7rem;
+  --text-sm: 0.85rem;
+  --text-body: 0.9rem;
+  --text-body-lg: 1.15rem;
+  --text-hero: clamp(4.5rem, 8.5vw, 9.5rem);
+  --text-h2: clamp(2.2rem, 3.5vw, 3.2rem);
 
-  --color-text-primary:    #1B1F4B;
-  --color-text-secondary:  rgba(27, 31, 75, 0.65);
-  --color-text-tertiary:   rgba(27, 31, 75, 0.4);
-  --color-text-on-dark:    #F5EFE0;
-  --color-text-on-dark-secondary: rgba(245, 239, 224, 0.55);
-  --color-text-on-dark-tertiary:  rgba(245, 239, 224, 0.3);
-  --color-border-light:    rgba(27, 31, 75, 0.1);
-  --color-border-gold:     rgba(201, 148, 58, 0.3);
+  --section-y: 7rem;
+  --section-x: 5rem;
+  --interlude-y: 11rem;
+  --card-pad: 2.8rem;
 
-  --text-xs:    0.7rem;
-  --text-hero:  clamp(3rem, 7vw, 7rem);
+  --transition: 0.25s ease;
+  --transition-slow: 0.75s ease;
+}
 
-  --radius-base: 4px;
+/* Grid utilities from Nalanda library */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+}
 
-  --transition-base: all 0.3s ease;
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem;
+}
+
+.grid-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: flex-start;
+}
+
+.grid-split-wide {
+  grid-template-columns: 3fr 2fr;
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid var(--color-border-light, rgba(27, 31, 75, 0.1));
+}
+
+.grid-4 > * {
+  padding: 3rem 2rem;
+  border-right: 1px solid var(--color-border-light, rgba(27, 31, 75, 0.1));
+}
+
+.grid-4 > *:last-child {
+  border-right: none;
+}
+
+@media (max-width: 1024px) {
+  .grid-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grid-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-2,
+  .grid-3,
+  .grid-4,
+  .grid-split,
+  .grid-split-wide {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .grid-split,
+  .grid-split-wide {
+    gap: 3rem;
+  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-inter), system-ui, sans-serif;
+  font-family: var(--sans);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -59,7 +123,7 @@ html {
 
 /* Custom prose overrides for rich text */
 .prose {
-  --tw-prose-headings: #1A3A2E;
-  --tw-prose-links: #2D6A4F;
-  --tw-prose-bold: #1A3A2E;
+  --tw-prose-headings: var(--ink);
+  --tw-prose-links: var(--ink-2);
+  --tw-prose-bold: var(--ink);
 }

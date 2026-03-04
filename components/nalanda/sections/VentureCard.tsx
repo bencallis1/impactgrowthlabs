@@ -1,4 +1,5 @@
 import type React from "react";
+import Link from "next/link";
 import { Tag } from "@/components/nalanda/ui/Tag";
 import { FadeIn } from "@/components/nalanda/ui/FadeIn";
 import styles from "./VentureCard.module.css";
@@ -24,44 +25,47 @@ export function VentureCard({
   href,
   delay = 0,
 }: VentureCardProps) {
-  const CardWrapper = ({
-    children,
-  }: {
-    children: React.ReactNode;
-  }) =>
-    href ? (
-      <a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={styles.card}
-      >
-        {children}
-      </a>
-    ) : (
-      <div className={styles.card}>{children}</div>
-    );
-
   return (
     <FadeIn delay={delay}>
-      <CardWrapper>
-        <div className={styles.header}>
-          <h3 className={styles.name}>{name}</h3>
+      {href ? (
+        <Link href={href} className={styles.card}>
+          <div className={styles.header}>
           <div className={styles.tags}>
-            <Tag variant="gold">{focusArea}</Tag>
-            <Tag variant="sage">{stage}</Tag>
+              <Tag variant="gold">{focusArea}</Tag>
+            </div>
+            <h3 className={styles.name}>{name}</h3>
+
           </div>
+          <p className={styles.description}>{description}</p>
+          {whatDrewUs && (
+            <p className={styles.whatDrewUs}>{whatDrewUs}</p>
+          )}
+          {founderQuote && (
+            <blockquote className={styles.quote}>
+              “{founderQuote}”
+            </blockquote>
+          )}
+        </Link>
+      ) : (
+        <div className={styles.card}>
+          <div className={styles.header}>
+            <h3 className={styles.name}>{name}</h3>
+            <div className={styles.tags}>
+              <Tag variant="gold">{focusArea}</Tag>
+              <Tag variant="sage">{stage}</Tag>
+            </div>
+          </div>
+          <p className={styles.description}>{description}</p>
+          {whatDrewUs && (
+            <p className={styles.whatDrewUs}>{whatDrewUs}</p>
+          )}
+          {founderQuote && (
+            <blockquote className={styles.quote}>
+              “{founderQuote}”
+            </blockquote>
+          )}
         </div>
-        <p className={styles.description}>{description}</p>
-        {whatDrewUs && (
-          <p className={styles.whatDrewUs}>{whatDrewUs}</p>
-        )}
-        {founderQuote && (
-          <blockquote className={styles.quote}>
-            “{founderQuote}”
-          </blockquote>
-        )}
-      </CardWrapper>
+      )}
     </FadeIn>
   );
 }

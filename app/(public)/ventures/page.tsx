@@ -93,7 +93,7 @@ export default function VenturesPage() {
             variant: "text",
           },
         ]}
-        variant="dark"
+        variant="light"
       />
 
       <section className={`${styles.section} ${styles.sectionLight}`}>
